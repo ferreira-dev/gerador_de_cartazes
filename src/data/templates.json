@@ -1,0 +1,43 @@
+[
+    {
+        "id": "oferta-destaque",
+        "name": "Oferta com Destaque",
+        "description": "Cartaz com destaque amarelo para ofertas",
+        "component": "OfertaDestaque",
+        "preview": "/previews/oferta-destaque.png",
+        "tags": [
+            "oferta",
+            "destaque",
+            "amarelo"
+        ],
+        "defaults": {
+            "headerText": "OFERTA",
+            "productName": "PRODUTO",
+            "productDetail": "MARCA/TIPO/GRAMATURA",
+            "price": 88.88,
+            "priceDecimals": 2
+        },
+        "colors": {
+            "primary": "#FFD700",
+            "secondary": "#FF0000",
+            "text": "#000000"
+        }
+    },
+    {
+        "id": "atacado-varejo",
+        "name": "Atacado/Varejo",
+        "description": "Ideal para preços diferenciados por quantidade",
+        "component": "AtacadoVarejo",
+        "tags": [
+            "atacado",
+            "varejo",
+            "duplo"
+        ],
+        "defaults": {
+            "headerText": "OFERTA",
+            "productName": "PRODUTO",
+            "priceRetail": 2.99,
+            "priceWholesale": 2.49
+        }
+    }
+]

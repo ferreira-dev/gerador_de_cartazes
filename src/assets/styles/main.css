@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-handwritten-primary: 'Permanent Marker', cursive;
+  --font-handwritten-secondary: 'Bangers', system-ui;
+  --font-handwritten-accent: 'Yellowtail', cursive;
+  --font-display: 'Bebas Neue', sans-serif;
+  
+  --color-primary: #2563eb;
+  --color-secondary: #facc15;
+  --color-danger: #ef4444;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f8fafc;
+  color: #1e293b;
+}

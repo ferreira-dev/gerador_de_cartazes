@@ -1,0 +1,15 @@
+services:
+  app:
+    build:
+      context: .
+      target: dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.vite
+    environment:
+      - NODE_ENV=development
+      - VITE_HOST=0.0.0.0
+    #user: "1000:1000" # Ajuste para o ID do usuário local se necessário
