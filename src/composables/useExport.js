@@ -5,22 +5,52 @@ import { ref } from 'vue';
 export function useExport() {
     const isExporting = ref(false);
 
-    const getCanvasElement = () => {
-        return document.querySelector('#poster-canvas');
+    // Helper to clone and prepare element for clean capture (avoids scroll issues)
+    const prepareCaptureElement = async () => {
+        const originalElement = document.querySelector('#poster-canvas');
+        if (!originalElement) return null;
+
+        // Clone the element
+        const clone = originalElement.cloneNode(true);
+
+        // Create an invisible container fixed at top-left
+        const container = document.createElement('div');
+        container.style.position = 'fixed';
+        container.style.top = '0';
+        container.style.left = '0';
+        container.style.width = '210mm'; // Standard A4 width to ensure consistent rendering
+        container.style.height = 'auto';
+        container.style.zIndex = '-9999';
+        container.style.overflow = 'visible';
+
+        // Add clone to container
+        container.appendChild(clone);
+        document.body.appendChild(container);
+
+        // Wait for styles/images to settle (briefly)
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        return { clone, container };
     };
 
     const downloadPNG = async (fileName = 'cartaz.png') => {
         try {
             isExporting.value = true;
-            const element = getCanvasElement();
-            if (!element) return;
+            const capture = await prepareCaptureElement();
+            if (!capture) return;
+            const { clone, container } = capture;
 
-            const canvas = await html2canvas(element, {
-                scale: 3, // Higher scale for better quality
+            const canvas = await html2canvas(clone, {
+                scale: 3,
                 useCORS: true,
                 logging: false,
-                backgroundColor: '#ffffff'
+                backgroundColor: '#ffffff',
+                windowWidth: clone.scrollWidth,
+                windowHeight: clone.scrollHeight
             });
+
+            // Clean up
+            document.body.removeChild(container);
 
             const link = document.createElement('a');
             link.download = fileName;
@@ -36,16 +66,22 @@ export function useExport() {
     const downloadPDF = async (fileName = 'cartaz.pdf', paperSize = 'a4', orientation = 'p') => {
         try {
             isExporting.value = true;
-            const element = getCanvasElement();
-            if (!element) return;
+            const capture = await prepareCaptureElement();
+            if (!capture) return;
+            const { clone, container } = capture;
 
             // 1. Capture High Res Image
-            const canvas = await html2canvas(element, {
-                scale: 4, // Very high quality for print
+            const canvas = await html2canvas(clone, {
+                scale: 4,
                 useCORS: true,
                 logging: false,
-                backgroundColor: '#ffffff'
+                backgroundColor: '#ffffff',
+                windowWidth: clone.scrollWidth,
+                windowHeight: clone.scrollHeight
             });
+
+            // Clean up
+            document.body.removeChild(container);
 
             const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
@@ -76,10 +112,22 @@ export function useExport() {
         // Here we will generate a blob and open it
         try {
             isExporting.value = true;
-            const element = getCanvasElement();
-            if (!element) return;
+            const capture = await prepareCaptureElement();
+            if (!capture) return;
+            const { clone, container } = capture;
 
-            const canvas = await html2canvas(element, { scale: 3 });
+            const canvas = await html2canvas(clone, {
+                scale: 3,
+                useCORS: true,
+                logging: false,
+                backgroundColor: '#ffffff',
+                windowWidth: clone.scrollWidth,
+                windowHeight: clone.scrollHeight
+            });
+
+            // Clean up
+            document.body.removeChild(container);
+
             const imgData = canvas.toDataURL('image/png');
 
             const printWindow = window.open('', '_blank');

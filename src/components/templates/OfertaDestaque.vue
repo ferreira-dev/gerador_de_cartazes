@@ -29,18 +29,18 @@ const priceParts = computed(() => {
       <!-- Brush SVGs background could go here, simulating yellow marker -->
       <div class="absolute inset-0 bg-yellow-400 transform -skew-y-2 scale-y-110 opacity-90 z-0 mx-4 rounded-sm" style="clip-path: polygon(2% 10%, 98% 2%, 96% 92%, 4% 98%);"></div>
       
-      <h1 class="font-marker text-red-600 text-[10cqw] leading-none z-10 relative drop-shadow-sm uppercase tracking-wide">
+      <h1 class="font-marker text-red-600 text-[10cqw] leading-tight z-10 relative drop-shadow-sm uppercase tracking-wide py-2">
         {{ data.headerText || 'OFERTA' }}
       </h1>
     </div>
 
     <!-- Product Info -->
     <div class="flex-1 w-full flex flex-col items-center justify-start px-8 text-center z-10 space-y-2">
-      <h2 class="font-marker text-black text-[12cqw] leading-[0.9] uppercase break-words w-full line-clamp-3">
+      <h2 class="font-marker text-black text-[12cqw] leading-tight uppercase break-words w-full line-clamp-3 py-2 px-4">
         {{ data.productName || 'NOME DO PRODUTO' }}
       </h2>
       
-      <p class="font-marker text-black text-[5cqw] opacity-80 uppercase">
+      <p class="font-marker text-black text-[5cqw] opacity-80 uppercase leading-normal">
         {{ data.productDetail || 'DETALHES DO PRODUTO' }}
       </p>
     </div>
@@ -52,8 +52,8 @@ const priceParts = computed(() => {
 
       <div class="relative z-10 flex items-start text-red-600 font-bangers dropshadow-white leading-none">
         <span class="text-[5cqw] mr-2 mt-4">R$</span>
-        <span class="text-[35cqw] tracking-tighter">{{ priceParts.int }}</span>
-        <div class="flex flex-col justify-start ml-1 mt-8">
+        <span class="text-[35cqw] tracking-wide">{{ priceParts.int }}</span>
+        <div class="flex flex-col justify-start ml-3 mt-8">
             <span class="text-[12cqw] leading-none">,{{ priceParts.dec }}</span>
         </div>
       </div>

@@ -37,7 +37,7 @@ const storeCurrentPaper = computed(() => store.paperSize);
           </div>
           <div>
             <h1 class="text-lg font-bold text-slate-800 leading-tight">Gerador de Cartazes</h1>
-            <p class="text-[10px] bg-blue-100 text-blue-700 px-1.5 rounded w-fit font-medium">MVP Beta</p>
+            <p class="text-[10px] bg-blue-100 text-blue-700 px-1.5 rounded w-fit font-medium">MVP Beta teste</p>
           </div>
         </div>
 
@@ -47,30 +47,32 @@ const storeCurrentPaper = computed(() => store.paperSize);
       </div>
     </header>
 
-    <main class="flex-1 container mx-auto p-4 lg:p-6 overflow-hidden max-h-[calc(100vh-64px)]">
+    <main class="flex-1 container mx-auto p-4 lg:p-6">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full">
         
         <!-- Sidebar -->
-        <div class="lg:col-span-4 flex flex-col gap-6 overflow-y-auto pr-2 pb-20 custom-scrollbar">
+        <div class="lg:col-span-4 lg:h-[calc(100vh-100px)] flex flex-col overflow-hidden min-h-0">
+          <div class="flex-1 overflow-y-auto pr-2 pb-6 custom-scrollbar space-y-6">
           
-          <!-- Template Selection -->
-          <section class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
-            <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-              Modelos
-            </h2>
-            <TemplateGallery />
-          </section>
+            <!-- Template Selection -->
+            <section class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
+              <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+                Modelos
+              </h2>
+              <TemplateGallery />
+            </section>
 
-          <!-- Product Data Form -->
-          <section class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex-1">
-             <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-4 flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-              Editar Informações
-            </h2>
-            <ProductForm />
-          </section>
+            <!-- Product Data Form -->
+            <section class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
+               <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-4 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Editar Informações
+              </h2>
+              <ProductForm />
+            </section>
 
+          </div>
         </div>
 
         <!-- Main Preview Area -->
