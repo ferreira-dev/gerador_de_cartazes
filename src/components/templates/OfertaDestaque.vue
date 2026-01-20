@@ -26,7 +26,6 @@ const priceParts = computed(() => {
   <div class="w-full h-full bg-white relative overflow-hidden flex flex-col items-center pt-8 poster-container">
     <!-- Header Section with Yellow Brush Effect -->
     <div class="relative w-full flex justify-center items-center mb-4 z-10">
-      <!-- Brush SVGs background could go here, simulating yellow marker -->
       <div class="absolute inset-0 bg-yellow-400 transform -skew-y-2 scale-y-110 opacity-90 z-0 mx-4 rounded-sm" style="clip-path: polygon(2% 10%, 98% 2%, 96% 92%, 4% 98%);"></div>
       
       <h1 class="font-marker text-red-600 text-[10cqw] leading-tight z-10 relative drop-shadow-sm uppercase tracking-wide py-2">
@@ -46,14 +45,19 @@ const priceParts = computed(() => {
     </div>
 
     <!-- Price Section -->
-    <div class="relative w-full flex justify-center items-baseline mb-16 z-10">
-      <!-- Decorative background for price if needed -->
+    <div class="relative w-full flex justify-center items-center mb-16 z-10 min-h-[45cqw]">
+      <!-- Decorative background for price -->
        <div class="absolute inset-0 bg-yellow-400 transform skew-y-1 scale-x-110 bottom-0 top-[20%] z-0" style="clip-path: polygon(0 20%, 100% 0, 100% 100%, 0% 100%);"></div>
 
-      <div class="relative z-10 flex items-start text-red-600 font-bangers dropshadow-white leading-none">
-        <span class="text-[5cqw] mr-2 mt-4">R$</span>
+      <div class="relative z-10 flex items-baseline text-red-600 font-bangers dropshadow-white leading-none">
+        <!-- R$ -->
+        <span class="text-[5cqw] mr-2">R$</span>
+        
+        <!-- Número Inteiro -->
         <span class="text-[35cqw] tracking-wide">{{ priceParts.int }}</span>
-        <div class="flex flex-col justify-start ml-3 mt-8">
+        
+        <!-- Centavos - Ajustado mt para [12cqw] para alinhar perfeitamente com o R$ -->
+        <div class="flex flex-col self-start mt-[12cqw] ml-1">
             <span class="text-[12cqw] leading-none">,{{ priceParts.dec }}</span>
         </div>
       </div>
