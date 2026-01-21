@@ -2,10 +2,12 @@
 import { computed } from 'vue';
 import { usePosterStore } from '../stores/posterStore';
 import OfertaDestaque from './templates/OfertaDestaque.vue';
+import AtacadoVarejo from './templates/AtacadoVarejo.vue';
 
 // Map template IDs to components
 const components = {
-  'oferta-destaque': OfertaDestaque
+  'oferta-destaque': OfertaDestaque,
+  'atacado-varejo': AtacadoVarejo
 };
 
 const store = usePosterStore();
