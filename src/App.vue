@@ -8,6 +8,7 @@ import ProductForm from './components/ProductForm.vue';
 import PaperSizeSelector from './components/PaperSizeSelector.vue';
 import PreviewCanvas from './components/PreviewCanvas.vue';
 import Button from 'primevue/button';
+import Select from 'primevue/select';
 
 const store = usePosterStore();
 const { downloadPNG, downloadPDF, isExporting, handlePrint } = useExport();
@@ -21,6 +22,15 @@ const handleExportPDF = () => {
     // Assuming portrait for now matching the default templates
     downloadPDF(`${store.posterData.productName || 'cartaz'}.pdf`, store.paperSize, 'p');
 };
+
+const fontOptions = [
+    { name: 'Permanent Marker', value: 'font-marker' },
+    { name: 'Bangers', value: 'font-bangers' },
+    { name: 'Chewy', value: 'font-chewy' },
+    { name: 'Luckiest Guy', value: 'font-luckiest' },
+    { name: 'Carter One', value: 'font-carter' },
+    { name: 'Yellowtail', value: 'font-yellowtail' },
+];
 
 const storeCurrentPaper = computed(() => store.paperSize);
 </script>
@@ -84,6 +94,19 @@ const storeCurrentPaper = computed(() => store.paperSize);
                <div>
                   <span class="text-xs font-semibold text-slate-400 block mb-1">TAMANHO</span>
                   <PaperSizeSelector />
+               </div>
+               
+               <div>
+                  <span class="text-xs font-semibold text-slate-400 block mb-1">FONTE</span>
+                  <Select 
+                      v-model="store.posterData.font" 
+                      :options="fontOptions" 
+                      optionLabel="name" 
+                      optionValue="value" 
+                      placeholder="Selecione uma fonte" 
+                      class="w-40 md:w-48 !h-10"
+                      size="small"
+                  />
                </div>
             </div>
 

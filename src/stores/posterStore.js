@@ -11,7 +11,8 @@ export const usePosterStore = defineStore('poster', {
             headerText: 'OFERTA',
             productName: 'PRODUTO',
             productDetail: 'MARCA/TIPO',
-            price: 0.00
+            price: 0.00,
+            font: 'font-marker'
         },
         zoomLevel: 1.0
     }),
