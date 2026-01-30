@@ -8,6 +8,7 @@ import ProductForm from './components/ProductForm.vue';
 import PaperSizeSelector from './components/PaperSizeSelector.vue';
 import PreviewCanvas from './components/PreviewCanvas.vue';
 import UserBar from './components/UserBar.vue';
+import ProtectedContent from './components/ProtectedContent.vue';
 import Button from 'primevue/button';
 import Select from 'primevue/select';
 import Toast from 'primevue/toast';
@@ -26,6 +27,7 @@ const handleExportPDF = () => {
 };
 
 const fontOptions = [
+  { name: 'Boogaloo', value: 'font-boogaloo' },
     { name: 'Permanent Marker', value: 'font-marker' },
     { name: 'Bangers', value: 'font-bangers' },
     { name: 'Chewy', value: 'font-chewy' },
@@ -62,104 +64,108 @@ const storeCurrentPaper = computed(() => store.paperSize);
     </header>
 
     <main class="flex-1 container mx-auto p-4 lg:p-6">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full">
-        
-        <!-- Sidebar -->
-        <div class="lg:col-span-4 lg:h-[calc(100vh-100px)] flex flex-col overflow-hidden min-h-0">
-          <div class="flex-1 overflow-y-auto pr-2 pb-6 custom-scrollbar space-y-6">
-          
-            <!-- Template Selection -->
-            <section class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
-              <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-                Modelos
-              </h2>
-              <TemplateGallery />
-            </section>
+      <ProtectedContent>
+        <template #default="{ user }">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full">
+            
+            <!-- Sidebar -->
+            <div class="lg:col-span-4 lg:h-[calc(100vh-100px)] flex flex-col overflow-hidden min-h-0">
+              <div class="flex-1 overflow-y-auto pr-2 pb-6 custom-scrollbar space-y-6">
+              
+                <!-- Template Selection -->
+                <section class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
+                  <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+                    Modelos
+                  </h2>
+                  <TemplateGallery />
+                </section>
 
-            <!-- Product Data Form -->
-            <section class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
-               <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-4 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                Editar Informações
-              </h2>
-              <ProductForm />
-            </section>
+                <!-- Product Data Form -->
+                <section class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
+                   <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-4 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    Editar Informações
+                  </h2>
+                  <ProductForm />
+                </section>
 
-          </div>
-        </div>
-
-        <!-- Main Preview Area -->
-        <div class="lg:col-span-8 flex flex-col h-full overflow-hidden bg-white rounded-xl shadow-sm border border-slate-200">
-          
-          <!-- Toolbar -->
-          <div class="p-4 border-b border-slate-100 flex flex-wrap justify-between items-center gap-4 bg-white z-10">
-            <div class="flex items-center gap-4">
-               <div>
-                  <span class="text-xs font-semibold text-slate-400 block mb-1">TAMANHO</span>
-                  <PaperSizeSelector />
-               </div>
-               
-               <div>
-                  <span class="text-xs font-semibold text-slate-400 block mb-1">FONTE</span>
-                  <Select 
-                      v-model="store.posterData.font" 
-                      :options="fontOptions" 
-                      optionLabel="name" 
-                      optionValue="value" 
-                      placeholder="Selecione uma fonte" 
-                      class="w-40 md:w-48 !h-10"
-                      size="small"
-                  />
-               </div>
+              </div>
             </div>
 
-            <div class="flex items-center gap-2">
-               <Button 
-                label="PNG" 
-                icon="pi pi-image" 
-                severity="secondary" 
-                outlined 
-                size="small" 
-                @click="handleExportPNG" 
-                :loading="isExporting"
-               />
-                <Button 
-                label="PDF" 
-                icon="pi pi-file-pdf" 
-                severity="danger" 
-                outlined 
-                size="small" 
-                @click="handleExportPDF"
-                :loading="isExporting"
-               />
-               <Button 
-                label="Imprimir" 
-                icon="pi pi-print" 
-                severity="primary" 
-                size="small" 
-                @click="handlePrint"
-                :loading="isExporting"
-               />
+            <!-- Main Preview Area -->
+            <div class="lg:col-span-8 flex flex-col h-full overflow-hidden bg-white rounded-xl shadow-sm border border-slate-200">
+              
+              <!-- Toolbar -->
+              <div class="p-4 border-b border-slate-100 flex flex-wrap justify-between items-center gap-4 bg-white z-10">
+                <div class="flex items-center gap-4">
+                   <div>
+                      <span class="text-xs font-semibold text-slate-400 block mb-1">TAMANHO</span>
+                      <PaperSizeSelector />
+                   </div>
+                   
+                   <div>
+                      <span class="text-xs font-semibold text-slate-400 block mb-1">FONTE</span>
+                      <Select 
+                          v-model="store.posterData.font" 
+                          :options="fontOptions" 
+                          optionLabel="name" 
+                          optionValue="value" 
+                          placeholder="Selecione uma fonte" 
+                          class="w-40 md:w-48 !h-10"
+                          size="small"
+                      />
+                   </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                   <Button 
+                    label="PNG" 
+                    icon="pi pi-image" 
+                    severity="secondary" 
+                    outlined 
+                    size="small" 
+                    @click="handleExportPNG" 
+                    :loading="isExporting"
+                   />
+                    <Button 
+                    label="PDF" 
+                    icon="pi pi-file-pdf" 
+                    severity="danger" 
+                    outlined 
+                    size="small" 
+                    @click="handleExportPDF"
+                    :loading="isExporting"
+                   />
+                   <Button 
+                    label="Imprimir" 
+                    icon="pi pi-print" 
+                    severity="primary" 
+                    size="small" 
+                    @click="handlePrint"
+                    :loading="isExporting"
+                   />
+                </div>
+              </div>
+
+              <!-- Canvas Container -->
+              <div class="flex-1 bg-slate-100 relative overflow-hidden flex items-center justify-center p-4">
+                 <!-- Background Grid Pattern -->
+                 <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(#444 1px, transparent 1px); background-size: 20px 20px;"></div>
+                 
+                 <PreviewCanvas />
+              </div>
+
+              <!-- Footer/Status -->
+               <div class="py-2 px-4 bg-white border-t border-slate-100 text-xs text-slate-400 flex justify-between items-center">
+                  <span>{{ storeCurrentPaper }} - Alta Resolução (300 DPI)</span>
+                  <span>Zoom automático</span>
+               </div>
+
             </div>
           </div>
-
-          <!-- Canvas Container -->
-          <div class="flex-1 bg-slate-100 relative overflow-hidden flex items-center justify-center p-4">
-             <!-- Background Grid Pattern -->
-             <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(#444 1px, transparent 1px); background-size: 20px 20px;"></div>
-             
-             <PreviewCanvas />
-          </div>
-
-          <!-- Footer/Status -->
-           <div class="py-2 px-4 bg-white border-t border-slate-100 text-xs text-slate-400 flex justify-between items-center">
-              <span>{{ storeCurrentPaper }} - Alta Resolução (300 DPI)</span>
-              <span>Zoom automático</span>
-           </div>
-
-        </div>
-      </div>
+        </template>
+      </ProtectedContent>
     </main>
   </div>
 </template>

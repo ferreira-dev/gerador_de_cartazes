@@ -108,3 +108,36 @@ A biblioteca `html2canvas` lê o clone DOM e desenha pixels em um elemento `<can
 
 2. **Estilização de Templates**:
    - Use sempre unidades relativas ao container (`cqw`, `%`) e nunca pixels fixos (`px`) para tamanhos de fonte ou margens estruturais, para garantir que a exportação High-DPI funcione corretamente.
+
+3. **Adicionar Novas Fontes**:
+   
+   Para adicionar uma nova fonte do Google Fonts ao seletor de fontes, siga esta ordem:
+
+   **Passo 1:** `index.html`
+   - Adicione o nome da fonte na URL de importação do Google Fonts
+   - Exemplo: `&family=Nome+Da+Fonte`
+   ```html
+   href="https://fonts.googleapis.com/css2?family=Bangers&family=Nova+Fonte&family=Roboto..."
+   ```
+
+   **Passo 2:** `src/assets/styles/fonts.css`
+   - Crie uma classe CSS para a fonte seguindo o padrão `.font-nomedafonte`
+   ```css
+   .font-nomedafonte {
+       font-family: 'Nome Da Fonte', cursive;
+   }
+   ```
+
+   **Passo 3:** `src/App.vue`
+   - Adicione a opção no array `fontOptions`
+   ```javascript
+   const fontOptions = [
+       // ... outras fontes
+       { name: 'Nome Da Fonte', value: 'font-nomedafonte' },
+   ];
+   ```
+
+   **Exemplo completo** (adicionando a fonte "Boogaloo"):
+   - `index.html`: `&family=Boogaloo`
+   - `fonts.css`: `.font-boogaloo { font-family: 'Boogaloo', cursive; }`
+   - `App.vue`: `{ name: 'Boogaloo', value: 'font-boogaloo' }`
