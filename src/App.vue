@@ -7,8 +7,10 @@ import TemplateGallery from './components/TemplateGallery.vue';
 import ProductForm from './components/ProductForm.vue';
 import PaperSizeSelector from './components/PaperSizeSelector.vue';
 import PreviewCanvas from './components/PreviewCanvas.vue';
+import UserBar from './components/UserBar.vue';
 import Button from 'primevue/button';
 import Select from 'primevue/select';
+import Toast from 'primevue/toast';
 
 const store = usePosterStore();
 const { downloadPNG, downloadPDF, isExporting, handlePrint } = useExport();
@@ -37,6 +39,7 @@ const storeCurrentPaper = computed(() => store.paperSize);
 
 <template>
   <div class="min-h-screen bg-slate-50 flex flex-col font-sans">
+    <Toast />
     
     <!-- Navbar -->
     <header class="bg-white shadow-sm border-b border-slate-200 z-50 sticky top-0">
@@ -51,8 +54,9 @@ const storeCurrentPaper = computed(() => store.paperSize);
           </div>
         </div>
 
-        <div class="flex items-center space-x-2">
+        <div class="flex items-center space-x-4">
             <a href="#" class="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors">Ajuda</a>
+            <UserBar />
         </div>
       </div>
     </header>
