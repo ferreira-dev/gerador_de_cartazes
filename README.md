@@ -20,9 +20,9 @@ O fluxo principal do sistema segue um padrão unidirecional simples, gerenciado 
 
 ```mermaid
 graph TD
-    UserInput[Formulário de Produto] -->|Update Actions| Store[Poster Store (Pinia)]
+    UserInput[Formulário de Produto] -->|Update Actions| Store[Poster Store]
     Store -->|Reactivity| Preview[PreviewCanvas.vue]
-    Preview -->|Props| Template[Template Component (ex: OfertaDestaque.vue)]
+    Preview -->|Props| Template[Template Component]
     UserAction[Botão Exportar] -->|Click| Composable[useExport.js]
     Composable -->|Reads DOM| Preview
     Composable -->|Generates| Output[PDF / PNG / Print]

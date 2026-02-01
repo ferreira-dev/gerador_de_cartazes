@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue';
+import { usePosterStore } from '../../stores/posterStore';
 
 const props = defineProps({
   data: {
@@ -7,6 +8,9 @@ const props = defineProps({
     required: true
   }
 });
+
+const store = usePosterStore();
+const theme = computed(() => store.currentTheme);
 
 const formatPrice = (val) => {
     const parts = (val || 0).toFixed(2).split('.');
@@ -18,13 +22,30 @@ const formatPrice = (val) => {
 
 const retailParts = computed(() => formatPrice(props.data.priceRetail));
 const wholesaleParts = computed(() => formatPrice(props.data.priceWholesale));
+
+// Determinar estilos baseados no tema
+const backgroundStyle = computed(() => {
+  if (theme.value.background.type === 'image') {
+    return {
+      backgroundImage: `url(${theme.value.background.value})`,
+      backgroundSize: 'contain',
+      backgroundPosition: 'top center, bottom center',
+      backgroundRepeat: 'no-repeat'
+    };
+  }
+  return {
+    backgroundColor: theme.value.background.value
+  };
+});
+
+const fontSizes = computed(() => theme.value.fontSize);
 </script>
 
 <template>
-  <div class="w-full h-full bg-white relative overflow-hidden flex flex-col pt-4 px-4 poster-container border-8 border-red-600">
+  <div class="w-full h-full relative overflow-hidden flex flex-col pt-4 px-4 poster-container border-8 border-red-600" :style="backgroundStyle">
     
-    <!-- Cabeçalho -->
-    <div class="w-full text-center mb-2">
+    <!-- Cabeçalho Condicional -->
+    <div v-if="theme.header.type === 'brush'" class="w-full text-center mb-2">
       <h1 
         class="text-red-600 text-[8cqw] leading-none uppercase tracking-tight py-1 bg-yellow-300 transform -rotate-1 shadow-sm inline-block px-4"
         :class="data.font"
@@ -33,16 +54,23 @@ const wholesaleParts = computed(() => formatPrice(props.data.priceWholesale));
       </h1>
     </div>
 
+    <!-- Header com Imagem (Hortifruti/Açougue) -->
+    <div v-else-if="theme.header.type === 'image'" class="relative w-full z-10 mb-2">
+      <img :src="theme.header.value" alt="Header" class="w-full h-auto object-contain" style="max-height: 12cqw;" />
+    </div>
+
     <!-- Produto -->
     <div class="w-full text-center flex flex-col items-center mb-4">
         <h2 
-            class="text-black text-[10cqw] leading-tight uppercase w-full line-clamp-2"
+            :style="{ fontSize: fontSizes.productName }"
+            class="text-black leading-tight uppercase w-full line-clamp-2"
             :class="data.font"
         >
             {{ data.productName || 'NOME DO PRODUTO' }}
         </h2>
         <p 
-            class="text-slate-600 text-[4cqw] uppercase"
+            :style="{ fontSize: fontSizes.productDetail }"
+            class="text-slate-600 uppercase"
             :class="data.font"
         >
             {{ data.productDetail || 'DETALHES DO PRODUTO' }}

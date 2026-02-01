@@ -1,10 +1,13 @@
 import { defineStore } from 'pinia'
 import templatesData from '../data/templates.json'
+import themesData from '../data/themes.json'
 
 export const usePosterStore = defineStore('poster', {
     state: () => ({
         templates: templatesData,
+        themes: themesData,
         currentTemplateId: 'oferta-destaque',
+        posterTheme: 'clean', // clean, padrao, hortifruti, acougue
         paperSize: 'A4', // A3, A4, A5
         orientation: 'portrait', // portrait, landscape
         posterData: {
@@ -15,7 +18,7 @@ export const usePosterStore = defineStore('poster', {
             priceRetail: 0.00,
             priceWholesale: 0.00,
             minQuantity: 3,
-            font: 'font-marker'
+            font: 'font-boogaloo'
         },
         zoomLevel: 1.0
     }),
@@ -23,6 +26,10 @@ export const usePosterStore = defineStore('poster', {
     getters: {
         currentTemplate: (state) => {
             return state.templates.find(t => t.id === state.currentTemplateId) || state.templates[0]
+        },
+
+        currentTheme: (state) => {
+            return state.themes.find(t => t.id === state.posterTheme) || state.themes[0]
         },
 
         formattedPrice: (state) => {
@@ -56,6 +63,10 @@ export const usePosterStore = defineStore('poster', {
 
         setPaperSize(size) {
             this.paperSize = size;
+        },
+
+        setTheme(themeId) {
+            this.posterTheme = themeId;
         },
 
         setZoom(level) {

@@ -4,6 +4,7 @@ import { usePosterStore } from './stores/posterStore';
 import { useExport } from './composables/useExport';
 
 import TemplateGallery from './components/TemplateGallery.vue';
+import ThemeSelector from './components/ThemeSelector.vue';
 import ProductForm from './components/ProductForm.vue';
 import PaperSizeSelector from './components/PaperSizeSelector.vue';
 import PreviewCanvas from './components/PreviewCanvas.vue';
@@ -27,8 +28,7 @@ const handleExportPDF = () => {
 };
 
 const fontOptions = [
-  { name: 'Boogaloo', value: 'font-boogaloo' },
-    { name: 'Permanent Marker', value: 'font-marker' },
+    { name: 'Boogaloo', value: 'font-boogaloo' },
     { name: 'Bangers', value: 'font-bangers' },
     { name: 'Chewy', value: 'font-chewy' },
     { name: 'Luckiest Guy', value: 'font-luckiest' },
@@ -72,11 +72,20 @@ const storeCurrentPaper = computed(() => store.paperSize);
             <div class="lg:col-span-4 lg:h-[calc(100vh-100px)] flex flex-col overflow-hidden min-h-0">
               <div class="flex-1 overflow-y-auto pr-2 pb-6 custom-scrollbar space-y-6">
               
+                <!-- Theme Selection -->
+                <section class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
+                  <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                    Tema do Cartaz
+                  </h2>
+                  <ThemeSelector />
+                </section>
+
                 <!-- Template Selection -->
                 <section class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
                   <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-                    Modelos
+                    Modelo de Precificação
                   </h2>
                   <TemplateGallery />
                 </section>

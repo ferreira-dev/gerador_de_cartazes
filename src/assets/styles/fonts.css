@@ -1,9 +1,5 @@
 /* Font imports handled in index.html for performance, this file can be used for font classes */
 
-.font-marker {
-    font-family: 'Permanent Marker', cursive;
-}
-
 .font-bangers {
     font-family: 'Bangers', system-ui;
 }

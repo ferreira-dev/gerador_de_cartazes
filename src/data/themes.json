@@ -1,0 +1,78 @@
+[
+    {
+        "id": "clean",
+        "name": "Clean",
+        "description": "Fundo branco com detalhes amarelos",
+        "background": {
+            "type": "solid",
+            "value": "#ffffff"
+        },
+        "header": {
+            "type": "brush",
+            "style": "yellow-brush"
+        },
+        "fontSize": {
+            "productName": "12cqw",
+            "productDetail": "5cqw",
+            "priceInteger": "35cqw",
+            "priceDecimal": "12cqw"
+        }
+    },
+    {
+        "id": "padrao",
+        "name": "Padrão",
+        "description": "Fundo com pinceladas amarelas",
+        "background": {
+            "type": "image",
+            "value": "/src/assets/images/themes/fundo_base.png"
+        },
+        "header": {
+            "type": "brush",
+            "style": "yellow-brush"
+        },
+        "fontSize": {
+            "productName": "18cqw",
+            "productDetail": "7cqw",
+            "priceInteger": "50cqw",
+            "priceDecimal": "18cqw"
+        }
+    },
+    {
+        "id": "hortifruti",
+        "name": "Hortifruti",
+        "description": "Tema para hortifrúti com cabeçalho personalizado",
+        "background": {
+            "type": "image",
+            "value": "/src/assets/images/themes/fundo_base.png"
+        },
+        "header": {
+            "type": "image",
+            "value": "/src/assets/images/themes/header_hortifruti.png"
+        },
+        "fontSize": {
+            "productName": "18cqw",
+            "productDetail": "7cqw",
+            "priceInteger": "50cqw",
+            "priceDecimal": "18cqw"
+        }
+    },
+    {
+        "id": "acougue",
+        "name": "Açougue",
+        "description": "Tema para açougue com cabeçalho personalizado",
+        "background": {
+            "type": "image",
+            "value": "/src/assets/images/themes/fundo_base.png"
+        },
+        "header": {
+            "type": "image",
+            "value": "/src/assets/images/themes/header_acougue.png"
+        },
+        "fontSize": {
+            "productName": "18cqw",
+            "productDetail": "7cqw",
+            "priceInteger": "50cqw",
+            "priceDecimal": "18cqw"
+        }
+    }
+]
