@@ -30,8 +30,8 @@ const backgroundStyle = computed(() => {
   if (theme.value.background.type === 'image') {
     return {
       backgroundImage: `url(${theme.value.background.value})`,
-      backgroundSize: 'contain',
-      backgroundPosition: 'top center, bottom center',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat'
     };
   }
@@ -45,12 +45,13 @@ const fontSizes = computed(() => theme.value.fontSize);
 
 <template>
   <div class="w-full h-full relative overflow-hidden flex flex-col items-center pt-8 poster-container" :style="backgroundStyle">
-    <!-- Header Section - Condicional baseado no tipo do tema -->
-    <div v-if="theme.header.type === 'brush'" class="relative w-full flex justify-center items-center mb-4 z-10">
-      <div class="absolute inset-0 bg-yellow-400 transform -skew-y-2 scale-y-110 opacity-90 z-0 mx-4 rounded-sm" style="clip-path: polygon(2% 10%, 98% 2%, 96% 92%, 4% 98%);"></div>
+    <!-- Header Section - Clean e Padrão: pincelada amarela -->
+    <div v-if="theme.header.type === 'brush'" class="clean-header-wrapper relative w-full flex justify-center items-center mb-4 z-10">
+      <!-- Pincelada decorativa somente no tema Clean -->
+      <div v-if="theme.id === 'clean'" class="clean-header-bg"></div>
       
       <h1 
-        class="text-red-600 text-[10cqw] leading-tight z-10 relative drop-shadow-sm uppercase tracking-wide py-2"
+        class="clean-header-text text-red-600 z-10 relative uppercase"
         :class="data.font"
       >
         {{ data.headerText || 'OFERTA' }}
@@ -82,21 +83,19 @@ const fontSizes = computed(() => theme.value.fontSize);
     </div>
 
     <!-- Price Section -->
-    <div class="relative w-full flex justify-center items-center mb-16 z-10 min-h-[45cqw]">
-      <!-- Decorative background for price -->
-       <div class="absolute inset-0 bg-yellow-400 transform skew-y-1 scale-x-110 bottom-0 top-[20%] z-0" style="clip-path: polygon(0 20%, 100% 0, 100% 100%, 0% 100%);"></div>
+    <div class="clean-price-section relative w-full flex justify-center items-center mb-16 z-10">
+      <!-- Decorative background for price - somente no tema Clean -->
+      <div v-if="theme.id === 'clean'" class="clean-price-bg"></div>
 
-      <!-- Layout Clean: centavos flutuando (original) -->
+      <!-- Layout Clean: centavos flutuando com posicionamento robusto para exportação -->
       <div 
         v-if="theme.id === 'clean'"
-        class="relative z-10 flex items-baseline text-red-600 dropshadow-white leading-none"
+        class="relative z-10 flex items-start text-red-600 dropshadow-white leading-none clean-price-wrapper"
         :class="data.font"
       >
-        <span class="text-[5cqw] mr-2">R$</span>
-        <span class="text-[35cqw] tracking-wide">{{ priceParts.int }}</span>
-        <div class="flex flex-col self-start mt-[12cqw] ml-1">
-            <span class="text-[12cqw] leading-none">,{{ priceParts.dec }}</span>
-        </div>
+        <span class="clean-currency">R$</span>
+        <span class="clean-integer">{{ priceParts.int }}</span>
+        <span class="clean-decimal">,{{ priceParts.dec }}</span>
       </div>
 
       <!-- Layout outros temas: tudo inline -->
@@ -125,5 +124,75 @@ const fontSizes = computed(() => theme.value.fontSize);
         1px -1px 0 #fff,
         -1px 1px 0 #fff,
         1px 1px 0 #fff;
+}
+
+/* Clean Theme Price Styles - Robusto para exportação */
+.clean-price-wrapper {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+}
+
+.clean-currency {
+    font-size: 5cqw;
+    margin-right: 0.5cqw;
+    margin-top: 10cqw;
+    line-height: 1;
+}
+
+.clean-integer {
+    font-size: 35cqw;
+    letter-spacing: 0.02em;
+    line-height: 0.85;
+}
+
+.clean-decimal {
+    font-size: 12cqw;
+    margin-left: 0.5cqw;
+    margin-top: 5cqw;
+    line-height: 1;
+}
+
+/* Clean Theme Header Styles - Robusto para exportação */
+.clean-header-wrapper {
+    height: 14cqw;
+    position: relative;
+}
+
+.clean-header-bg {
+    position: absolute;
+    top: 0;
+    left: 4%;
+    right: 4%;
+    bottom: 0;
+    background-color: #facc15; /* yellow-400 */
+    transform: skewY(-2deg);
+    z-index: 0;
+    border-radius: 2px;
+}
+
+.clean-header-text {
+    font-size: 10cqw;
+    line-height: 1.1;
+    letter-spacing: 0.05em;
+    padding: 1cqw 0;
+    z-index: 1;
+}
+
+/* Clean Theme Price Section Styles - Robusto para exportação */
+.clean-price-section {
+    min-height: 45cqw;
+    position: relative;
+}
+
+.clean-price-bg {
+    position: absolute;
+    top: 15%;
+    left: -5%;
+    right: -5%;
+    bottom: 0;
+    background-color: #facc15; /* yellow-400 */
+    transform: skewY(1deg);
+    z-index: 0;
 }
 </style>
