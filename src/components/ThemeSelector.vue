@@ -18,13 +18,13 @@ const themeOptions = [
       Tema do Cartaz
     </label>
     <Select 
-      v-model="store.posterTheme" 
+      :modelValue="store.posterTheme" 
       :options="themeOptions" 
       optionLabel="name" 
       optionValue="value" 
       placeholder="Selecione um tema" 
       class="w-full"
-      @change="store.setTheme(store.posterTheme)"
+      @update:modelValue="store.setTheme($event)"
     />
   </div>
 </template>

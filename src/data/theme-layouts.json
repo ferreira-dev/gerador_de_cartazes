@@ -1,0 +1,170 @@
+{
+    "clean": {
+        "name": "Clean",
+        "description": "Fundo branco com detalhes amarelos",
+        "background": {
+            "type": "solid",
+            "value": "#ffffff"
+        },
+        "layouts": {
+            "oferta-destaque": {
+                "component": "clean/OfertaDestaque",
+                "name": "Oferta com Destaque",
+                "description": "Layout clean com fundo amarelo liso",
+                "config": {
+                    "headerStyle": "solid-yellow",
+                    "priceStyle": "floating-cents",
+                    "fontSize": {
+                        "productName": "12cqw",
+                        "productDetail": "5cqw",
+                        "priceInteger": "35cqw",
+                        "priceDecimal": "12cqw"
+                    }
+                }
+            },
+            "atacado-varejo": {
+                "component": "clean/AtacadoVarejo",
+                "name": "Atacado/Varejo",
+                "description": "Preços diferenciados em estilo clean",
+                "config": {
+                    "headerStyle": "solid-yellow",
+                    "boxStyle": "minimal",
+                    "fontSize": {
+                        "productName": "10cqw",
+                        "productDetail": "4cqw",
+                        "priceInteger": "18cqw",
+                        "priceDecimal": "8cqw"
+                    }
+                }
+            }
+        }
+    },
+    "padrao": {
+        "name": "Padrão",
+        "description": "Fundo com pinceladas amarelas",
+        "background": {
+            "type": "image",
+            "value": "/src/assets/images/themes/fundo_base.png"
+        },
+        "layouts": {
+            "oferta-destaque": {
+                "component": "padrao/OfertaDestaque",
+                "name": "Oferta com Destaque",
+                "description": "Layout padrão com fundo pincelado",
+                "config": {
+                    "headerStyle": "brush-yellow",
+                    "priceStyle": "inline",
+                    "fontSize": {
+                        "productName": "18cqw",
+                        "productDetail": "7cqw",
+                        "priceInteger": "50cqw",
+                        "priceDecimal": "18cqw"
+                    }
+                }
+            },
+            "atacado-varejo": {
+                "component": "padrao/AtacadoVarejo",
+                "name": "Atacado/Varejo",
+                "description": "Preços diferenciados em estilo padrão",
+                "config": {
+                    "headerStyle": "brush-yellow",
+                    "boxStyle": "bordered",
+                    "fontSize": {
+                        "productName": "16cqw",
+                        "productDetail": "6cqw",
+                        "priceInteger": "20cqw",
+                        "priceDecimal": "10cqw"
+                    }
+                }
+            }
+        }
+    },
+    "hortifruti": {
+        "name": "Hortifruti",
+        "description": "Tema para hortifrúti com cabeçalho personalizado",
+        "background": {
+            "type": "image",
+            "value": "/src/assets/images/themes/fundo_base.png"
+        },
+        "header": {
+            "type": "image",
+            "value": "/src/assets/images/themes/header_hortifruti.png"
+        },
+        "layouts": {
+            "oferta-destaque": {
+                "component": "hortifruti/OfertaDestaque",
+                "name": "Oferta com Destaque",
+                "description": "Layout hortifruti com cabeçalho temático",
+                "config": {
+                    "headerStyle": "image",
+                    "priceStyle": "inline",
+                    "fontSize": {
+                        "productName": "18cqw",
+                        "productDetail": "7cqw",
+                        "priceInteger": "50cqw",
+                        "priceDecimal": "18cqw"
+                    }
+                }
+            },
+            "atacado-varejo": {
+                "component": "hortifruti/AtacadoVarejo",
+                "name": "Atacado/Varejo",
+                "description": "Preços diferenciados em estilo hortifruti",
+                "config": {
+                    "headerStyle": "image",
+                    "boxStyle": "bordered",
+                    "fontSize": {
+                        "productName": "16cqw",
+                        "productDetail": "6cqw",
+                        "priceInteger": "20cqw",
+                        "priceDecimal": "10cqw"
+                    }
+                }
+            }
+        }
+    },
+    "acougue": {
+        "name": "Açougue",
+        "description": "Tema para açougue com cabeçalho personalizado",
+        "background": {
+            "type": "image",
+            "value": "/src/assets/images/themes/fundo_base.png"
+        },
+        "header": {
+            "type": "image",
+            "value": "/src/assets/images/themes/header_acougue.png"
+        },
+        "layouts": {
+            "oferta-destaque": {
+                "component": "acougue/OfertaDestaque",
+                "name": "Oferta com Destaque",
+                "description": "Layout açougue com cabeçalho temático",
+                "config": {
+                    "headerStyle": "image",
+                    "priceStyle": "inline",
+                    "fontSize": {
+                        "productName": "18cqw",
+                        "productDetail": "7cqw",
+                        "priceInteger": "50cqw",
+                        "priceDecimal": "18cqw"
+                    }
+                }
+            },
+            "atacado-varejo": {
+                "component": "acougue/AtacadoVarejo",
+                "name": "Atacado/Varejo",
+                "description": "Preços diferenciados em estilo açougue",
+                "config": {
+                    "headerStyle": "image",
+                    "boxStyle": "bordered",
+                    "fontSize": {
+                        "productName": "16cqw",
+                        "productDetail": "6cqw",
+                        "priceInteger": "20cqw",
+                        "priceDecimal": "10cqw"
+                    }
+                }
+            }
+        }
+    }
+}

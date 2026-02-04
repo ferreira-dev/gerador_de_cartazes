@@ -25,7 +25,7 @@ const store = usePosterStore();
     </div>
 
     <!-- Price Section - Conditional based on Template -->
-    <div v-if="store.currentTemplateId === 'atacado-varejo'" class="grid grid-cols-12 gap-3 bg-slate-50 p-3 rounded-lg border border-slate-200">
+    <div v-if="store.currentLayoutId === 'atacado-varejo'" class="grid grid-cols-12 gap-3 bg-slate-50 p-3 rounded-lg border border-slate-200">
         
         <div class="col-span-12">
             <label class="text-xs font-bold text-blue-600 uppercase mb-2 block">Regra de Atacado</label>

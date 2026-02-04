@@ -1,13 +1,11 @@
 import { defineStore } from 'pinia'
-import templatesData from '../data/templates.json'
-import themesData from '../data/themes.json'
+import themeLayoutsData from '../data/theme-layouts.json'
 
 export const usePosterStore = defineStore('poster', {
     state: () => ({
-        templates: templatesData,
-        themes: themesData,
-        currentTemplateId: 'oferta-destaque',
+        themeLayouts: themeLayoutsData,
         posterTheme: 'clean', // clean, padrao, hortifruti, acougue
+        currentLayoutId: 'oferta-destaque', // oferta-destaque, atacado-varejo
         paperSize: 'A4', // A3, A4, A5
         orientation: 'portrait', // portrait, landscape
         posterData: {
@@ -24,16 +22,44 @@ export const usePosterStore = defineStore('poster', {
     }),
 
     getters: {
-        currentTemplate: (state) => {
-            return state.templates.find(t => t.id === state.currentTemplateId) || state.templates[0]
+        // Retorna a configuração completa do tema atual
+        currentThemeConfig: (state) => {
+            return state.themeLayouts[state.posterTheme] || state.themeLayouts['clean'];
         },
 
-        currentTheme: (state) => {
-            return state.themes.find(t => t.id === state.posterTheme) || state.themes[0]
+        // Retorna a lista de layouts disponíveis para o tema atual
+        availableLayouts: (state) => {
+            const theme = state.themeLayouts[state.posterTheme];
+            if (!theme || !theme.layouts) return [];
+
+            return Object.entries(theme.layouts).map(([id, layout]) => ({
+                id,
+                name: layout.name,
+                description: layout.description,
+                component: layout.component
+            }));
         },
 
+        // Retorna a configuração do layout atual dentro do tema selecionado
+        currentLayoutConfig: (state) => {
+            const theme = state.themeLayouts[state.posterTheme];
+            if (!theme || !theme.layouts) return null;
+
+            return theme.layouts[state.currentLayoutId] ||
+                Object.values(theme.layouts)[0];
+        },
+
+        // Retorna o caminho do componente a ser carregado
+        currentComponentPath: (state) => {
+            const theme = state.themeLayouts[state.posterTheme];
+            if (!theme || !theme.layouts) return null;
+
+            const layout = theme.layouts[state.currentLayoutId];
+            return layout ? layout.component : null;
+        },
+
+        // Getters legados para compatibilidade
         formattedPrice: (state) => {
-            // Formatter for potential use, though template might handle it raw for styling
             return new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2 }).format(state.posterData.price)
         },
 
@@ -47,13 +73,26 @@ export const usePosterStore = defineStore('poster', {
     },
 
     actions: {
-        setTemplate(id) {
-            this.currentTemplateId = id;
-            // Reset data based on template defaults if needed? 
-            // For now keep data to allow seamless switching if keys match
-            const template = this.templates.find(t => t.id === id);
-            if (template && template.defaults) {
-                // Optional: merge defaults if fields are empty
+        setLayout(layoutId) {
+            // Verifica se o layout existe no tema atual
+            const theme = this.themeLayouts[this.posterTheme];
+            if (theme && theme.layouts && theme.layouts[layoutId]) {
+                this.currentLayoutId = layoutId;
+            }
+        },
+
+        setTheme(themeId) {
+            if (this.themeLayouts[themeId]) {
+                this.posterTheme = themeId;
+
+                // Se o layout atual não existe no novo tema, seleciona o primeiro disponível
+                const newTheme = this.themeLayouts[themeId];
+                if (newTheme.layouts && !newTheme.layouts[this.currentLayoutId]) {
+                    const firstLayoutId = Object.keys(newTheme.layouts)[0];
+                    if (firstLayoutId) {
+                        this.currentLayoutId = firstLayoutId;
+                    }
+                }
             }
         },
 
@@ -63,10 +102,6 @@ export const usePosterStore = defineStore('poster', {
 
         setPaperSize(size) {
             this.paperSize = size;
-        },
-
-        setTheme(themeId) {
-            this.posterTheme = themeId;
         },
 
         setZoom(level) {

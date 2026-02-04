@@ -1,20 +1,36 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, defineAsyncComponent, markRaw } from 'vue';
 import { usePosterStore } from '../stores/posterStore';
-import OfertaDestaque from './templates/OfertaDestaque.vue';
-import AtacadoVarejo from './templates/AtacadoVarejo.vue';
 
-// Map template IDs to components
-const components = {
-  'oferta-destaque': OfertaDestaque,
-  'atacado-varejo': AtacadoVarejo
+// Mapeamento de componentes por tema/layout
+const componentMap = {
+  'clean/OfertaDestaque': markRaw(defineAsyncComponent(() => import('./templates/clean/OfertaDestaque.vue'))),
+  'clean/AtacadoVarejo': markRaw(defineAsyncComponent(() => import('./templates/clean/AtacadoVarejo.vue'))),
+  'padrao/OfertaDestaque': markRaw(defineAsyncComponent(() => import('./templates/padrao/OfertaDestaque.vue'))),
+  'padrao/AtacadoVarejo': markRaw(defineAsyncComponent(() => import('./templates/padrao/AtacadoVarejo.vue'))),
+  'hortifruti/OfertaDestaque': markRaw(defineAsyncComponent(() => import('./templates/hortifruti/OfertaDestaque.vue'))),
+  'hortifruti/AtacadoVarejo': markRaw(defineAsyncComponent(() => import('./templates/hortifruti/AtacadoVarejo.vue'))),
+  'acougue/OfertaDestaque': markRaw(defineAsyncComponent(() => import('./templates/acougue/OfertaDestaque.vue'))),
+  'acougue/AtacadoVarejo': markRaw(defineAsyncComponent(() => import('./templates/acougue/AtacadoVarejo.vue')))
 };
 
 const store = usePosterStore();
 
+// Retorna o componente atual baseado no tema e layout selecionados
 const currentComponent = computed(() => {
-  return components[store.currentTemplateId] || null;
+  const componentPath = store.currentComponentPath;
+  if (!componentPath) return null;
+  return componentMap[componentPath] || null;
 });
+
+// Configuração do layout atual
+const layoutConfig = computed(() => {
+  const config = store.currentLayoutConfig;
+  return config ? config.config : {};
+});
+
+// Configuração do tema atual
+const themeConfig = computed(() => store.currentThemeConfig);
 
 // Dimensions in mm
 const paperSizes = {
@@ -45,6 +61,8 @@ const aspectRatioStyle = computed(() => {
             <component 
                 :is="currentComponent" 
                 :data="store.posterData"
+                :config="layoutConfig"
+                :themeConfig="themeConfig"
                 v-if="currentComponent"
             />
              <div v-else class="flex items-center justify-center h-full text-slate-400">
