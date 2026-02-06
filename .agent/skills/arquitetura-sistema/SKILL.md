@@ -15,7 +15,7 @@ Este é um **SaaS para geração de cartazes de precificação** voltado para di
 - **Build**: Vite
 - **UI**: PrimeVue 4 (tema Aura, Styled Mode) + TailwindCSS
 - **Estado**: Pinia
-- **Exportação**: html2canvas + jsPDF
+- **Exportação**: html-to-image + jsPDF
 - **Container**: Docker + docker-compose
 
 ## Arquitetura e Fluxo de Dados
@@ -80,9 +80,10 @@ Cada tema tem seus próprios componentes de layout, eliminando condicionais comp
    - Clona `#poster-canvas` para evitar capturar barras de rolagem
    - Posiciona clone invisível com largura real do papel (210mm para A4)
 
-2. **Rasterização** (html2canvas):
-   - Aplica scale 3x ou 4x para alta resolução (300 DPI)
-   - Converte DOM em canvas
+2. **Rasterização** (html-to-image):
+   - Usa SVG foreignObject para renderização fiel
+   - Aplica pixelRatio para alta resolução (300 DPI)
+   - Gera imagem (Blob/DataURL) a partir do DOM
 
 3. **Geração Final**:
    - **PNG**: canvas → Base64 → download

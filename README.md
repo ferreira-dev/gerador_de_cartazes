@@ -9,7 +9,7 @@ O sistema é um gerador de cartazes baseado em templates, construído como uma S
 - **Build Tool**: Vite
 - **UI Framework**: PrimeVue 4 + TailwindCSS
 - **Gerenciamento de Estado**: Pinia
-- **Geração de Imagem/PDF**: html2canvas + jspdf
+- **Geração de Imagem/PDF**: html-to-image + jspdf
 - **Ícones**: PrimeIcons / Lucide Vue
 
 ---
@@ -73,9 +73,10 @@ Como o preview na tela pode ter barras de rolagem ou estar em um tamanho reduzid
 2. O clone é inserido em um container invisível (`div` fixo fora da viewport).
 3. O container é forçado a ter a largura física real do papel (ex: `210mm` para A4). Isso garante que o `html2canvas` renderize o cartaz na resolução correta de impressão.
 
-#### Passo 2: Rasterização (`html2canvas`)
-A biblioteca `html2canvas` lê o clone DOM e desenha pixels em um elemento `<canvas>`.
-- **Scale**: É aplicado um fator de escala (3x ou 4x) para garantir que o texto e vetores fiquem nítidos (High DPI) na impressão final, evitando o aspecto "pixelado".
+#### Passo 2: Rasterização (`html-to-image`)
+A biblioteca `html-to-image` converte o DOM em SVG (foreignObject) e depois rasteriza para canvas/imagem.
+- **Scale**: É mantido fator de escala para garantir nitidez (High DPI).
+- **Vantagem**: Melhor suporte a CSS moderno (Flexbox, Grid) e fontes web.
 
 #### Passo 3: Geração do Arquivo
 - **PNG**: O canvas é convertido para Base64 (`toDataURL`). Um link `<a>` temporário é criado para download.
@@ -94,7 +95,7 @@ A biblioteca `html2canvas` lê o clone DOM e desenha pixels em um elemento `<can
 | `stores/posterStore.js` | Store (Pinia) | Fonte única da verdade. Armazena dados do produto, config do papel e ID do template selecionado. |
 | `PreviewCanvas.vue` | Componente | Orquestrador visual. Gerencia o container do papel (aspect ratio) e instancia o template correto. |
 | `templates/OfertaDestaque.vue` | Componente | Design do cartaz. Define o HTML/CSS específico do layout. Usa Container Queries para garantir o layout fluido. |
-| `composables/useExport.js` | Composable | Lógica de "Negócio" da exportação. Abstrai a complexidade do html2canvas/jspdf. |
+| `composables/useExport.js` | Composable | Lógica de "Negócio" da exportação. Abstrai a complexidade do html-to-image/jspdf. |
 | `App.vue` | View Principal | Layout da aplicação, conectando o painel de formulário (esquerda) com o preview (direita). |
 
 ---
