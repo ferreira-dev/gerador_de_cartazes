@@ -1,11 +1,11 @@
-import html2canvas from 'html2canvas';
+import { toPng, toJpeg } from 'html-to-image';
 import { jsPDF } from 'jspdf';
 import { ref } from 'vue';
 
 export function useExport() {
     const isExporting = ref(false);
 
-    // Helper to clone and prepare element for clean capture (avoids scroll issues)
+    // Helper to clone and prepare element for clean capture
     const prepareCaptureElement = async () => {
         const originalElement = document.querySelector('#poster-canvas');
         if (!originalElement) return null;
@@ -18,7 +18,7 @@ export function useExport() {
         container.style.position = 'fixed';
         container.style.top = '0';
         container.style.left = '0';
-        container.style.width = '210mm'; // Standard A4 width to ensure consistent rendering
+        container.style.width = '210mm'; // Standard A4 width
         container.style.height = 'auto';
         container.style.zIndex = '-9999';
         container.style.overflow = 'visible';
@@ -27,8 +27,9 @@ export function useExport() {
         container.appendChild(clone);
         document.body.appendChild(container);
 
-        // Wait for styles/images to settle (briefly)
-        await new Promise(resolve => setTimeout(resolve, 100));
+        // Wait for fonts and styles to settle
+        await document.fonts.ready;
+        await new Promise(resolve => setTimeout(resolve, 200));
 
         return { clone, container };
     };
@@ -40,13 +41,12 @@ export function useExport() {
             if (!capture) return;
             const { clone, container } = capture;
 
-            const canvas = await html2canvas(clone, {
-                scale: 3,
-                useCORS: true,
-                logging: false,
+            const dataUrl = await toPng(clone, {
+                quality: 1,
+                pixelRatio: 3,
                 backgroundColor: '#ffffff',
-                windowWidth: clone.scrollWidth,
-                windowHeight: clone.scrollHeight
+                skipFonts: false,
+                fontEmbedCSS: undefined // Let it auto-detect
             });
 
             // Clean up
@@ -54,7 +54,7 @@ export function useExport() {
 
             const link = document.createElement('a');
             link.download = fileName;
-            link.href = canvas.toDataURL('image/png');
+            link.href = dataUrl;
             link.click();
         } catch (error) {
             console.error('Export failed', error);
@@ -70,23 +70,18 @@ export function useExport() {
             if (!capture) return;
             const { clone, container } = capture;
 
-            // 1. Capture High Res Image
-            const canvas = await html2canvas(clone, {
-                scale: 4,
-                useCORS: true,
-                logging: false,
+            // Captura de alta resolução
+            const dataUrl = await toJpeg(clone, {
+                quality: 1,
+                pixelRatio: 4,
                 backgroundColor: '#ffffff',
-                windowWidth: clone.scrollWidth,
-                windowHeight: clone.scrollHeight
+                skipFonts: false
             });
 
             // Clean up
             document.body.removeChild(container);
 
-            const imgData = canvas.toDataURL('image/jpeg', 1.0);
-
-            // 2. Generate PDF
-            // jsPDF units: mm is standard for paper sizes
+            // Gerar PDF
             const doc = new jsPDF({
                 orientation: orientation === 'landscape' ? 'l' : 'p',
                 unit: 'mm',
@@ -96,7 +91,7 @@ export function useExport() {
             const pdfWidth = doc.internal.pageSize.getWidth();
             const pdfHeight = doc.internal.pageSize.getHeight();
 
-            doc.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+            doc.addImage(dataUrl, 'JPEG', 0, 0, pdfWidth, pdfHeight);
             doc.save(fileName);
 
         } catch (error) {
@@ -107,28 +102,21 @@ export function useExport() {
     };
 
     const handlePrint = async () => {
-        // For printing, usually opening the PDF or Image in new tab is best
-        // Or simple window.print() if CSS @media print is clear
-        // Here we will generate a blob and open it
         try {
             isExporting.value = true;
             const capture = await prepareCaptureElement();
             if (!capture) return;
             const { clone, container } = capture;
 
-            const canvas = await html2canvas(clone, {
-                scale: 3,
-                useCORS: true,
-                logging: false,
+            const dataUrl = await toPng(clone, {
+                quality: 1,
+                pixelRatio: 3,
                 backgroundColor: '#ffffff',
-                windowWidth: clone.scrollWidth,
-                windowHeight: clone.scrollHeight
+                skipFonts: false
             });
 
             // Clean up
             document.body.removeChild(container);
-
-            const imgData = canvas.toDataURL('image/png');
 
             const printWindow = window.open('', '_blank');
             if (printWindow) {
@@ -136,7 +124,7 @@ export function useExport() {
                 <html>
                     <head><title>Imprimir Cartaz</title></head>
                     <body style="margin:0; display:flex; justify-content:center; align-items:center;">
-                        <img src="${imgData}" style="max-width:100%; height:auto;" onload="window.print();window.close()"/>
+                        <img src="${dataUrl}" style="max-width:100%; height:auto;" onload="window.print();window.close()"/>
                     </body>
                 </html>
             `);

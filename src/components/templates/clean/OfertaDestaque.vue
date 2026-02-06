@@ -31,10 +31,10 @@ const fontSizes = computed(() => props.config.fontSize);
 <template>
   <div class="w-full h-full relative overflow-hidden flex flex-col items-center pt-8 poster-container bg-white">
     <!-- Header Section - Clean: fundo amarelo liso -->
-    <div class="clean-header-wrapper relative w-full flex justify-center items-center mb-4 z-10">
-      <div class="clean-header-bg"></div>
+    <div class="relative w-full flex justify-center items-center mb-4 z-10">
+      <div class="absolute inset-0 bg-yellow-400 transform -skew-y-2 scale-y-110 opacity-90 z-0 mx-4 rounded-sm" style="clip-path: polygon(2% 10%, 98% 2%, 96% 92%, 4% 98%);"></div>
       <h1 
-        class="clean-header-text text-red-600 z-10 relative uppercase"
+        class="text-red-600 text-[10cqw] leading-tight z-10 relative drop-shadow-sm uppercase tracking-wide py-2"
         :class="data.font"
       >
         {{ data.headerText || 'OFERTA' }}
@@ -60,17 +60,24 @@ const fontSizes = computed(() => props.config.fontSize);
       </p>
     </div>
 
-    <!-- Price Section - Clean: centavos flutuando -->
-    <div class="clean-price-section relative w-full flex justify-center items-center mb-16 z-10">
-      <div class="clean-price-bg"></div>
+    <div class="relative w-full flex justify-center items-center mb-16 z-10 min-h-[45cqw]">
+      <!-- Fundo amarelo simples sem clip-path -->
+      <div class="absolute left-0 right-0 bg-yellow-400 z-0" style="top: 15cqw; bottom: 0;"></div>
 
       <div 
-        class="relative z-10 flex items-start text-red-600 dropshadow-white leading-none clean-price-wrapper"
+        class="relative z-10 flex items-baseline text-red-600 dropshadow-white leading-none"
         :class="data.font"
       >
-        <span class="clean-currency">R$</span>
-        <span class="clean-integer">{{ priceParts.int }}</span>
-        <span class="clean-decimal">,{{ priceParts.dec }}</span>
+        <!-- R$ -->
+        <span class="text-[5cqw] mr-2">R$</span>
+        
+        <!-- Número Inteiro -->
+        <span class="text-[35cqw] tracking-wide">{{ priceParts.int }}</span>
+        
+        <!-- Centavos -->
+        <div class="flex flex-col self-start mt-[12cqw] ml-1">
+            <span class="text-[12cqw] leading-none">,{{ priceParts.dec }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -88,75 +95,5 @@ const fontSizes = computed(() => props.config.fontSize);
         1px -1px 0 #fff,
         -1px 1px 0 #fff,
         1px 1px 0 #fff;
-}
-
-/* Clean Theme Price Styles */
-.clean-price-wrapper {
-    display: flex;
-    align-items: flex-start;
-    position: relative;
-}
-
-.clean-currency {
-    font-size: 5cqw;
-    margin-right: 0.5cqw;
-    margin-top: 10cqw;
-    line-height: 1;
-}
-
-.clean-integer {
-    font-size: 35cqw;
-    letter-spacing: 0.02em;
-    line-height: 0.85;
-}
-
-.clean-decimal {
-    font-size: 12cqw;
-    margin-left: 0.5cqw;
-    margin-top: 5cqw;
-    line-height: 1;
-}
-
-/* Clean Theme Header Styles */
-.clean-header-wrapper {
-    height: 14cqw;
-    position: relative;
-}
-
-.clean-header-bg {
-    position: absolute;
-    top: 0;
-    left: 4%;
-    right: 4%;
-    bottom: 0;
-    background-color: #facc15;
-    transform: skewY(-2deg);
-    z-index: 0;
-    border-radius: 2px;
-}
-
-.clean-header-text {
-    font-size: 10cqw;
-    line-height: 1.1;
-    letter-spacing: 0.05em;
-    padding: 1cqw 0;
-    z-index: 1;
-}
-
-/* Clean Theme Price Section Styles */
-.clean-price-section {
-    min-height: 45cqw;
-    position: relative;
-}
-
-.clean-price-bg {
-    position: absolute;
-    top: 15%;
-    left: -5%;
-    right: -5%;
-    bottom: 0;
-    background-color: #facc15;
-    transform: skewY(1deg);
-    z-index: 0;
 }
 </style>

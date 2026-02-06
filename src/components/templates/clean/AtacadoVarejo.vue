@@ -71,10 +71,10 @@ const fontSizes = computed(() => props.config.fontSize);
         <span class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gray-600 text-white text-[3cqw] px-3 py-0.5 rounded-full uppercase font-bold tracking-wider">
           Unidade
         </span>
-        <div class="flex items-baseline justify-center text-gray-800 leading-none mt-2" :class="data.font">
-          <span class="text-[3cqw] mr-1">R$</span>
-          <span :style="{ fontSize: fontSizes.priceInteger }">{{ retailParts.int }}</span>
-          <span :style="{ fontSize: fontSizes.priceDecimal }">,{{ retailParts.dec }}</span>
+        <div class="flex items-start justify-center text-gray-800 leading-none mt-2" :class="data.font">
+          <span class="text-[3cqw] mr-1 mt-[1cqw]">R$</span>
+          <span :style="{ fontSize: fontSizes.priceInteger }" class="leading-[1]">{{ retailParts.int }}</span>
+          <span :style="{ fontSize: fontSizes.priceDecimal }" class="mt-[1cqw] leading-[1]">,{{ retailParts.dec }}</span>
         </div>
       </div>
 
@@ -86,11 +86,11 @@ const fontSizes = computed(() => props.config.fontSize);
           </span>
         </div>
        
-        <div class="flex items-baseline justify-center text-red-700 leading-none mt-4 drop-shadow-sm" :class="data.font">
-          <span class="text-[5cqw] mr-2">R$</span>
-          <span class="text-[20cqw]">{{ wholesaleParts.int }}</span>
-          <div class="flex flex-col justify-start ml-1">
-            <span class="text-[9cqw] leading-none">,{{ wholesaleParts.dec }}</span>
+        <div class="flex items-start justify-center text-red-700 leading-none mt-4 drop-shadow-sm" :class="data.font">
+          <span class="text-[5cqw] mr-2 mt-[2cqw]">R$</span>
+          <span class="text-[20cqw] leading-[1]">{{ wholesaleParts.int }}</span>
+          <div class="flex flex-col justify-start ml-1 mt-[2cqw]">
+            <span class="text-[9cqw] leading-[1]">,{{ wholesaleParts.dec }}</span>
             <span class="text-[2.5cqw] text-red-800 font-bold uppercase mt-1">Nesta oferta</span>
           </div>
         </div>
