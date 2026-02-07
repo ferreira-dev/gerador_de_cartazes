@@ -104,7 +104,7 @@ A biblioteca `html-to-image` converte o DOM em SVG (foreignObject) e depois rast
 
 1. **Adicionar Novos Templates**:
    - Crie o componente em `src/components/templates/`.
-   - Adicione metadados em `src/data/templates.json`.
+   - Adicione a configuração em `src/data/theme-layouts.json`.
    - Registre o componente no objeto `components` dentro de `PreviewCanvas.vue`.
 
 2. **Estilização de Templates**:

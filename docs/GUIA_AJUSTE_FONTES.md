@@ -2,58 +2,66 @@
 
 ## 📍 Onde ajustar os tamanhos de fonte
 
-Os tamanhos de fonte são controlados centralmente no arquivo `src/data/themes.json`.
+Os tamanhos de fonte são controlados centralmente no arquivo **`src/data/theme-layouts.json`**.
 
-### Estrutura de cada tema:
+Agora, cada **layout** dentro de um tema tem sua própria configuração de fontes.
+
+### Estrutura do arquivo:
 
 ```json
 {
-    "id": "nome-do-tema",
-    "name": "Nome Exibido",
-    "fontSize": {
-        "productName": "18cqw",      // Tamanho do nome do produto
-        "productDetail": "7cqw",      // Tamanho dos detalhes (marca/tipo)
-        "priceInteger": "50cqw",      // Tamanho do preço (inteiro E centavos)
-        "priceDecimal": "18cqw"       // Tamanho do R$ (símbolo)
+    "nome-do-tema": {
+        "layouts": {
+            "nome-do-layout": {
+                "config": {
+                    "fontSize": {
+                        "productName": "18cqw",      // Tamanho do nome do produto
+                        "productDetail": "7cqw",     // Tamanho dos detalhes (marca/tipo)
+                        "priceInteger": "50cqw",     // Tamanho do preço (inteiro)
+                        "priceDecimal": "18cqw"      // Tamanho dos centavos/símbolo
+                    }
+                }
+            }
+        }
     }
 }
 ```
 
-## 🎯 Valores Atuais
+## 🎯 Valores Atuais (Exemplo)
 
-### Tema Clean (mantém original)
+### Tema Clean
 - `productName`: **12cqw**
-- `productDetail`: **5cqw**
 - `priceInteger`: **35cqw**
-- `priceDecimal`: **12cqw** (R$)
 
-### Temas Padrão, Hortifruti e Açougue (maiores)
+### Temas Padrão, Hortifruti e Açougue (Layout Oferta Destaque)
 - `productName`: **18cqw**
-- `productDetail`: **7cqw**
-- `priceInteger`: **50cqw**
-- `priceDecimal`: **18cqw** (R$)
+- `priceInteger`: **50cqw** or **45cqw**
 
 ## ⚙️ Como aumentar/diminuir fontes
 
-### Para aumentar as fontes dos temas (exceto Clean):
+1. Abra `src/data/theme-layouts.json`
+2. Localize o **tema** desejado (ex: `padrao`)
+3. Localize o **layout** desejado (ex: `oferta-destaque`)
+4. Dentro de `config` > `fontSize`, ajuste os valores:
 
-1. Abra `src/data/themes.json`
-2. Localize o tema desejado (padrao, hortifruti ou acougue)
-3. Na seção `fontSize`, aumente os valores:
    - **Nome do produto maior?** → Aumente `productName` (ex: de 18cqw para 20cqw)
    - **Preço maior?** → Aumente `priceInteger` (ex: de 50cqw para 55cqw)
-   - **R$ maior?** → Aumente `priceDecimal` (ex: de 18cqw para 20cqw)
 
 ### Exemplo de ajuste:
 
 ```json
-{
-    "id": "padrao",
-    "fontSize": {
-        "productName": "20cqw",    // Era 18cqw, agora maior
-        "productDetail": "8cqw",    // Era 7cqw
-        "priceInteger": "55cqw",    // Era 50cqw, agora maior
-        "priceDecimal": "20cqw"     // Era 18cqw
+"padrao": {
+    "layouts": {
+        "oferta-destaque": {
+            "config": {
+                "fontSize": {
+                    "productName": "20cqw",    // Aumentado
+                    "productDetail": "8cqw",
+                    "priceInteger": "55cqw",    // Aumentado
+                    "priceDecimal": "20cqw"
+                }
+            }
+        }
     }
 }
 ```
@@ -62,19 +70,10 @@ Os tamanhos de fonte são controlados centralmente no arquivo `src/data/themes.j
 
 - `cqw` = Container Query Width (percentual da largura do container)
 - **1cqw** = 1% da largura do cartaz
-- **50cqw** = 50% da largura do cartaz
 - Valores maiores = texto maior
 
 ## ⚠️ Importante
 
-- **Não altere o tema Clean** se quiser manter o layout original
-- **Todos os 3 temas** (Padrão, Hortifruti, Açougue) devem ter os mesmos tamanhos
-- Se quiser que o preço seja maior que o nome do produto, `priceInteger` deve ser > `productName`
-- Após alterar, salve o arquivo e o preview atualiza automaticamente
+- **Layouts Independentes**: Agora você pode ter fontes grandes no "Oferta Destaque" e fontes pequenas no "Atacado/Varejo" dentro do mesmo tema.
+- **Preview**: O preview atualiza automaticamente ao salvar o arquivo.
 
-## 🔄 Layout do Preço
-
-O preço agora está configurado para exibir **todos os dígitos na mesma linha**:
-- R$ 4,99 (tudo alinhado horizontalmente)
-- O `priceInteger` controla o tamanho tanto do inteiro quanto dos centavos
-- O `priceDecimal` controla apenas o tamanho do símbolo R$
