@@ -5,152 +5,50 @@ description: Como criar novos temas e layouts seguindo os padrões do projeto
 
 # Skill: Desenvolvimento de Temas e Layouts
 
-## Visão Geral
+## 📖 Documentação Completa
 
-Esta skill orienta a criação de novos temas (ex: Farmácia, Padaria) e layouts (ex: Combo Família, Kit Churrasco) para o gerador de cartazes.
+Para instruções detalhadas sobre desenvolvimento de temas e layouts, consulte:
 
-## Conceitos-Chave
+**`docs/ARQUITETURA_E_DESENVOLVIMENTO.md`**
 
-- **Tema**: Visual/estilo geral do cartaz (cores, backgrounds, cabeçalhos)
-  - Exemplos: Clean, Padrão, Hortifruti, Açougue
-  
-- **Layout**: Estrutura de precificação dentro de um tema
-  - Exemplos: Oferta Destaque, Atacado/Varejo
+Este documento contém:
+- Passo a passo completo para criar novos temas
+- Passo a passo completo para criar novos layouts
+- Estrutura básica de componentes
+- Configuração de fontes e estilos
+- Exemplos de código
+- Checklist de verificação
 
-## Estrutura de Arquivos
+## Guia Rápido de Referência
 
-```
-src/
-├── components/templates/
-│   └── [tema]/
-│       ├── OfertaDestaque.vue
-│       └── AtacadoVarejo.vue
-├── data/
-│   └── theme-layouts.json
-└── assets/images/themes/
-    ├── fundo_[tema].png
-    └── header_[tema].png
-```
-
-## Como Criar um Novo Tema
-
-### Passo 1: Criar Pasta e Componentes
+### Criar Novo Tema: Checklist Resumido
 
 ```bash
-# No host
+# 1. Criar pasta no host
 mkdir src/components/templates/[nome-tema]
+
+# 2. Criar componentes (ex: OfertaDestaque.vue, AtacadoVarejo.vue)
+
+# 3. Adicionar entrada em src/data/theme-layouts.json
+
+# 4. Registrar em PreviewCanvas.vue (componentMap)
+
+# 5. Adicionar em ThemeSelector.vue (themeOptions)
 ```
 
-Criar componentes de layout dentro da pasta (ex: `OfertaDestaque.vue`, `AtacadoVarejo.vue`)
+### Criar Novo Layout: Checklist Resumido
 
-### Passo 2: Configurar em `theme-layouts.json`
+```bash
+# 1. Criar componente [NomeLayout].vue em cada pasta de tema
 
-```json
-{
-  "[nome-tema]": {
-    "name": "Nome Exibido",
-    "description": "Descrição do tema",
-    "background": {
-      "type": "solid|image",
-      "value": "#ffffff|/src/assets/images/themes/fundo_tema.png"
-    },
-    "header": {
-      "type": "image",
-      "value": "/src/assets/images/themes/header_tema.png"
-    },
-    "layouts": {
-      "oferta-destaque": {
-        "component": "[nome-tema]/OfertaDestaque",
-        "name": "Oferta com Destaque",
-        "description": "Layout de oferta para [tema]",
-        "config": {
-          "headerStyle": "solid-yellow|brush-yellow|image",
-          "priceStyle": "floating-cents|inline",
-          "fontSize": {
-            "productName": "12cqw",
-            "productDetail": "5cqw",
-            "priceInteger": "35cqw",
-            "priceDecimal": "12cqw"
-          }
-        }
-      }
-    }
-  }
-}
+# 2. Adicionar no objeto "layouts" de cada tema em theme-layouts.json
+
+# 3. Registrar em PreviewCanvas.vue (componentMap)
+
+# 4. Se precisar campos específicos, atualizar ProductForm.vue
 ```
 
-### Passo 3: Registrar Componentes em `PreviewCanvas.vue`
-
-Adicionar importação dinâmica no `componentMap`:
-
-```javascript
-const componentMap = {
-  'clean/OfertaDestaque': () => import('./templates/clean/OfertaDestaque.vue'),
-  '[nome-tema]/OfertaDestaque': () => import('./templates/[nome-tema]/OfertaDestaque.vue'),
-  // ...
-}
-```
-
-### Passo 4: Adicionar Opção em `ThemeSelector.vue`
-
-```javascript
-const themeOptions = [
-  { name: 'Clean', value: 'clean' },
-  { name: 'Nome do Tema', value: '[nome-tema]' },
-  // ...
-]
-```
-
-## Como Criar um Novo Layout
-
-### Passo 1: Criar Componente Vue
-
-Criar `[NomeLayout].vue` nas pastas dos temas que terão esse layout:
-- `src/components/templates/clean/[NomeLayout].vue`
-- `src/components/templates/padrao/[NomeLayout].vue`
-- etc.
-
-### Passo 2: Atualizar `theme-layouts.json`
-
-Adicionar layout dentro de cada tema:
-
-```json
-"layouts": {
-  "oferta-destaque": { ... },
-  "[novo-layout-id]": {
-    "component": "[tema]/[NomeLayout]",
-    "name": "Nome do Layout",
-    "description": "Descrição",
-    "config": { ... }
-  }
-}
-```
-
-### Passo 3: Registrar em `PreviewCanvas.vue`
-
-```javascript
-const componentMap = {
-  'clean/[NomeLayout]': () => import('./templates/clean/[NomeLayout].vue'),
-  'padrao/[NomeLayout]': () => import('./templates/padrao/[NomeLayout].vue'),
-  // ...
-}
-```
-
-## Padrões de Desenvolvimento de Componentes
-
-### Props Esperadas
-
-Todo componente de layout recebe:
-
-```javascript
-defineProps({
-  data: Object,      // posterData do store
-  config: Object,    // config do theme-layouts.json
-  themeConfig: Object // config do tema
-})
-```
-
-### Estrutura Básica de Template
+### Template Mínimo de Componente
 
 ```vue
 <script setup>
@@ -170,24 +68,25 @@ const priceParts = computed(() => {
 
 <template>
   <div class="poster-container" :class="data.font">
-    <!-- Container com aspect-ratio -->
     <div class="poster-content">
-      <!-- Header -->
       <header class="poster-header">
         <h1>{{ data.headerText }}</h1>
       </header>
       
-      <!-- Conteúdo principal -->
       <div class="product-info">
-        <h2 class="product-name">{{ data.productName }}</h2>
-        <p class="product-detail">{{ data.productDetail }}</p>
+        <h2 :style="{ fontSize: config.fontSize.productName }">
+          {{ data.productName }}
+        </h2>
       </div>
       
-      <!-- Preço -->
       <div class="price-display">
-        <span class="currency">R$</span>
-        <span class="integer">{{ priceParts.integer }}</span>
-        <span class="decimal">,{{ priceParts.decimal }}</span>
+        <span :style="{ fontSize: config.fontSize.priceCurrency }">R$</span>
+        <span :style="{ fontSize: config.fontSize.priceInteger }">
+          {{ priceParts.integer }}
+        </span>
+        <span :style="{ fontSize: config.fontSize.priceDecimal }">
+          ,{{ priceParts.decimal }}
+        </span>
       </div>
     </div>
   </div>
@@ -198,97 +97,99 @@ const priceParts = computed(() => {
   container-type: inline-size;
   width: 100%;
   height: 100%;
-  /* NUNCA usar px para fontes, sempre cqw */
-}
-
-.product-name {
-  font-size: 12cqw; /* Tamanho relativo ao container */
-}
-
-.integer {
-  font-size: 35cqw;
 }
 </style>
 ```
 
-### Estilização Critical Rules
+### Estrutura de Entrada no theme-layouts.json
+
+```json
+{
+  "[tema-id]": {
+    "name": "Nome Exibido",
+    "description": "Descrição",
+    "background": {
+      "type": "solid|image",
+      "value": "#ffffff|/caminho/imagem.png"
+    },
+    "layouts": {
+      "[layout-id]": {
+        "component": "[tema-id]/[NomeComponente]",
+        "name": "Nome do Layout",
+        "description": "Descrição do layout",
+        "config": {
+          "fontSize": {
+            "productName": "12cqw",
+            "productDetail": "5cqw",
+            "priceCurrency": "12cqw",
+            "priceInteger": "35cqw",
+            "priceDecimal": "12cqw"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Regras Críticas (Nunca Esquecer)
 
 ✅ **SEMPRE**:
-- Usar `container-type: inline-size` no elemento raiz
-- Usar `cqw` para tamanhos de fonte
-- Usar `%` para espaçamentos estruturais
-- Usar `scoped` no `<style>`
+- `container-type: inline-size` no elemento raiz
+- Tamanhos de fonte em `cqw` (via `config.fontSize`)
+- Aplicar fontes com `:style` (nunca CSS fixo)
+- Usar `<script setup>` e `ref()`
 
 ❌ **NUNCA**:
-- Usar `px` para fontes ou margens estruturais
-- Usar dimensões fixas que quebram em diferentes tamanhos de papel
+- Usar `px` para fontes ou estrutura
+- Definir `font-size` fixo no CSS
+- Esquecer de registrar em `PreviewCanvas.vue`
+- Usar Options API ou `reactive()` para primitivos
 
-### Acessando Configurações
+### Como Ajustar Fontes Rapidamente
 
-```vue
-<script setup>
-const props = defineProps(['data', 'config', 'themeConfig'])
+Abra `src/data/theme-layouts.json` e localize:
 
-// Acessar fontSize do config
-const productNameSize = props.config?.fontSize?.productName || '12cqw'
-
-// Acessar background do tema
-const bgStyle = computed(() => {
-  if (props.themeConfig.background?.type === 'image') {
-    return { backgroundImage: `url(${props.themeConfig.background.value})` }
+```json
+"[tema]": {
+  "layouts": {
+    "[layout]": {
+      "config": {
+        "fontSize": {
+          "productName": "18cqw",     // ⬆️ Aumentar aqui
+          "priceInteger": "50cqw"     // ⬆️ Aumentar aqui
+        }
+      }
+    }
   }
-  return { backgroundColor: props.themeConfig.background?.value || '#fff' }
-})
-</script>
+}
 ```
 
-## Adicionando Novas Fontes
+**Unidade `cqw`**: 1% da largura do container
+- Aumentar valor = texto maior
+- Diminuir valor = texto menor
+- Escala automaticamente para todos os tamanhos de papel
 
-1. **`index.html`**: Adicionar à URL do Google Fonts
-   ```html
-   &family=Nome+Da+Fonte
-   ```
+### Arquivos a Modificar para Novo Tema/Layout
 
-2. **`src/assets/styles/fonts.css`**: Criar classe CSS
-   ```css
-   .font-nomedafonte {
-     font-family: 'Nome Da Fonte', cursive;
-   }
-   ```
+| Ação | Arquivo | O que fazer |
+|------|---------|-------------|
+| Criar componente | `src/components/templates/[tema]/[Layout].vue` | Criar arquivo Vue |
+| Configurar tema/layout | `src/data/theme-layouts.json` | Adicionar entrada JSON |
+| Registrar componente | `src/components/PreviewCanvas.vue` | Adicionar ao `componentMap` |
+| Adicionar opção de tema | `src/components/ThemeSelector.vue` | Adicionar ao `themeOptions` |
+| Campos específicos (se necessário) | `src/components/ProductForm.vue` | Adicionar `v-if` condicional |
+| Imagens (se necessário) | `src/assets/images/themes/` | Adicionar arquivos .png |
 
-3. **`src/App.vue`**: Adicionar ao array `fontOptions`
-   ```javascript
-   { name: 'Nome Da Fonte', value: 'font-nomedafonte' }
-   ```
+### Verificação Final
 
-## Campos Dinâmicos no Formulário
+Antes de considerar completo:
 
-Se um layout precisa de campos específicos (ex: Atacado/Varejo precisa de 2 preços), atualizar `ProductForm.vue`:
+- [ ] Preview renderiza corretamente
+- [ ] Exportação PNG funciona (A3, A4, A5)
+- [ ] Exportação PDF funciona
+- [ ] Impressão funciona
+- [ ] Fontes escalam proporcionalmente
+- [ ] Não há console errors
+- [ ] Layout não quebra em orientações diferentes
 
-```vue
-<template v-if="store.currentLayoutId === 'atacado-varejo'">
-  <FloatLabel>
-    <InputNumber 
-      id="priceRetail" 
-      v-model="store.posterData.priceRetail"
-      mode="currency" 
-      currency="BRL" 
-      locale="pt-BR"
-    />
-    <label for="priceRetail">Preço Varejo</label>
-  </FloatLabel>
-</template>
-```
-
-## Checklist de Verificação
-
-Ao criar um novo tema/layout:
-
-- [ ] Componentes Vue criados em todas as pastas de tema necessárias
-- [ ] Entrada adicionada em `theme-layouts.json`
-- [ ] Componentes registrados em `PreviewCanvas.vue` (componentMap)
-- [ ] Opção adicionada em `ThemeSelector.vue` (se for tema novo)
-- [ ] Campos específicos adicionados em `ProductForm.vue` (se necessário)
-- [ ] Imagens de background/header adicionadas em `src/assets/images/themes/` (se aplicável)
-- [ ] Testado preview e exportação em diferentes tamanhos de papel (A3, A4, A5)
-- [ ] Verificado que fontes escalam corretamente com `cqw`
