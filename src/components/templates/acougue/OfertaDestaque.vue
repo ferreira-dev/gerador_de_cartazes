@@ -43,14 +43,14 @@ const fontSizes = computed(() => props.config.fontSize);
 </script>
 
 <template>
-  <div class="w-full h-full relative overflow-hidden flex flex-col items-center pt-8 poster-container" :style="backgroundStyle">
+  <div class="w-full h-full relative overflow-hidden flex flex-col items-center poster-container" :style="backgroundStyle">
     <!-- Header Section - Açougue: imagem temática -->
-    <div class="relative w-full z-10 mb-4">
-      <img :src="themeConfig.header.value" alt="Header Açougue" class="w-full h-auto object-contain" style="max-height: 15cqw;" />
+    <div class="absolute top-0 left-0 w-full z-10" style="height: 26cqw;">
+      <img :src="themeConfig.header.value" alt="Header Açougue" class="w-full h-full object-cover" />
     </div>
 
     <!-- Product Info -->
-    <div class="flex-1 w-full flex flex-col items-center justify-start px-8 text-center z-10 space-y-2">
+    <div class="flex-1 w-full flex flex-col items-center justify-start px-8 text-center z-10 space-y-2" style="margin-top: 20cqw;">
       <h2 
         :style="{ fontSize: fontSizes.productName }"
         class="text-black leading-normal uppercase break-words w-full line-clamp-3 py-4 px-4"

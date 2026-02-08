@@ -45,15 +45,15 @@ const fontSizes = computed(() => props.config.fontSize);
 </script>
 
 <template>
-  <div class="w-full h-full relative overflow-hidden flex flex-col pt-4 px-4 poster-container border-8 border-red-600" :style="backgroundStyle">
+  <div class="w-full h-full relative overflow-hidden flex flex-col poster-container border-8 border-red-600" :style="backgroundStyle">
     
     <!-- Header com Imagem Hortifruti -->
-    <div class="relative w-full z-10 mb-2">
-      <img :src="themeConfig.header.value" alt="Header Hortifruti" class="w-full h-auto object-contain" style="max-height: 12cqw;" />
+    <div class="absolute top-0 left-0 w-full z-10" style="height: 26cqw;">
+      <img :src="themeConfig.header.value" alt="Header Hortifruti" class="w-full h-full object-cover" />
     </div>
 
     <!-- Produto -->
-    <div class="w-full text-center flex flex-col items-center mb-4">
+    <div class="w-full text-center flex flex-col items-center mb-4 px-4" style="margin-top: 26cqw;">
       <h2 
         :style="{ fontSize: fontSizes.productName }"
         class="text-black leading-tight uppercase w-full line-clamp-2"
