@@ -32,8 +32,6 @@ const fontOptions = [
     { name: 'Bangers', value: 'font-bangers' },
     { name: 'Chewy', value: 'font-chewy' },
     { name: 'Luckiest Guy', value: 'font-luckiest' },
-    { name: 'Carter One', value: 'font-carter' },
-    { name: 'Yellowtail', value: 'font-yellowtail' },
 ];
 
 const storeCurrentPaper = computed(() => store.paperSize);
