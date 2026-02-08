@@ -27,10 +27,11 @@ const formatPrice = (val) => {
 const retailParts = computed(() => formatPrice(props.data.priceRetail));
 const wholesaleParts = computed(() => formatPrice(props.data.priceWholesale));
 const fontSizes = computed(() => props.config.fontSize);
+const productInfoSpacingClass = computed(() => `space-y-${props.config.productInfoSpacing || '0'}`);
 </script>
 
 <template>
-  <div class="w-full h-full relative overflow-hidden flex flex-col pt-4 px-4 poster-container bg-white border-4 border-red-600">
+  <div class="w-full h-full relative overflow-hidden flex flex-col pt-4 px-4 poster-container bg-white border-8 border-red-600">
     
     <!-- Cabeçalho Clean - Fundo amarelo liso -->
     <div class="w-full text-center mb-2">
@@ -46,7 +47,7 @@ const fontSizes = computed(() => props.config.fontSize);
     </div>
 
     <!-- Produto -->
-    <div class="w-full text-center flex flex-col items-center mb-4">
+    <div class="w-full text-center flex flex-col items-center mb-4" :class="productInfoSpacingClass">
       <h2 
         :style="{ fontSize: fontSizes.productName }"
         class="text-black leading-tight uppercase w-full line-clamp-2"

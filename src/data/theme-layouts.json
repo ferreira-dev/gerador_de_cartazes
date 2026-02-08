@@ -14,6 +14,7 @@
                 "config": {
                     "headerStyle": "solid-yellow",
                     "priceStyle": "floating-cents",
+                    "productInfoSpacing": "2",
                     "fontSize": {
                         "productName": "12cqw",
                         "productDetail": "5cqw",
@@ -30,6 +31,7 @@
                 "config": {
                     "headerStyle": "solid-yellow",
                     "boxStyle": "minimal",
+                    "productInfoSpacing": "0",
                     "fontSize": {
                         "productName": "10cqw",
                         "productDetail": "4cqw",
@@ -56,6 +58,7 @@
                 "config": {
                     "headerStyle": "brush-yellow",
                     "priceStyle": "inline",
+                    "productInfoSpacing": "0",
                     "fontSize": {
                         "productName": "15cqw",
                         "productDetail": "8cqw",
@@ -72,6 +75,7 @@
                 "config": {
                     "headerStyle": "brush-yellow",
                     "boxStyle": "bordered",
+                    "productInfoSpacing": "0",
                     "fontSize": {
                         "productName": "16cqw",
                         "productDetail": "6cqw",
@@ -102,8 +106,9 @@
                 "config": {
                     "headerStyle": "image",
                     "priceStyle": "inline",
+                    "productInfoSpacing": "0",
                     "fontSize": {
-                        "productName": "18cqw",
+                        "productName": "15cqw",
                         "productDetail": "8cqw",
                         "priceCurrency": "4cqw",
                         "priceInteger": "40cqw",
@@ -118,6 +123,7 @@
                 "config": {
                     "headerStyle": "image",
                     "boxStyle": "bordered",
+                    "productInfoSpacing": "0",
                     "fontSize": {
                         "productName": "16cqw",
                         "productDetail": "6cqw",
@@ -148,8 +154,9 @@
                 "config": {
                     "headerStyle": "image",
                     "priceStyle": "inline",
+                    "productInfoSpacing": "0",
                     "fontSize": {
-                        "productName": "18cqw",
+                        "productName": "15cqw",
                         "productDetail": "8cqw",
                         "priceCurrency": "4cqw",
                         "priceInteger": "40cqw",
@@ -164,6 +171,7 @@
                 "config": {
                     "headerStyle": "image",
                     "boxStyle": "bordered",
+                    "productInfoSpacing": "0",
                     "fontSize": {
                         "productName": "16cqw",
                         "productDetail": "6cqw",

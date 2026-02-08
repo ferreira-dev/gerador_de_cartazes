@@ -42,6 +42,7 @@ const backgroundStyle = computed(() => {
 });
 
 const fontSizes = computed(() => props.config.fontSize);
+const productInfoSpacingClass = computed(() => `space-y-${props.config.productInfoSpacing || '0'}`);
 </script>
 
 <template>
@@ -58,7 +59,7 @@ const fontSizes = computed(() => props.config.fontSize);
     </div>
 
     <!-- Produto -->
-    <div class="w-full text-center flex flex-col items-center mb-4">
+    <div class="w-full text-center flex flex-col items-center mb-4" :class="productInfoSpacingClass">
       <h2 
         :style="{ fontSize: fontSizes.productName }"
         class="text-black leading-tight uppercase w-full line-clamp-2"

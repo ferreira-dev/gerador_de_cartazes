@@ -26,6 +26,7 @@ const priceParts = computed(() => {
 });
 
 const fontSizes = computed(() => props.config.fontSize);
+const productInfoSpacingClass = computed(() => `space-y-${props.config.productInfoSpacing || '0'}`);
 </script>
 
 <template>
@@ -42,7 +43,7 @@ const fontSizes = computed(() => props.config.fontSize);
     </div>
 
     <!-- Product Info -->
-    <div class="flex-1 w-full flex flex-col items-center justify-start px-8 text-center z-10 space-y-2">
+    <div class="flex-1 w-full flex flex-col items-center justify-start px-8 text-center z-10" :class="productInfoSpacingClass">
       <h2 
         :style="{ fontSize: fontSizes.productName }"
         class="text-black leading-normal uppercase break-words w-full line-clamp-3 py-4 px-4"
