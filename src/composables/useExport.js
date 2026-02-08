@@ -122,9 +122,52 @@ export function useExport() {
             if (printWindow) {
                 printWindow.document.write(`
                 <html>
-                    <head><title>Imprimir Cartaz</title></head>
-                    <body style="margin:0; display:flex; justify-content:center; align-items:center;">
-                        <img src="${dataUrl}" style="max-width:100%; height:auto;" onload="window.print();window.close()"/>
+                    <head>
+                        <title>Imprimir Cartaz</title>
+                        <style>
+                            * {
+                                margin: 0;
+                                padding: 0;
+                                box-sizing: border-box;
+                            }
+                            html, body {
+                                margin: 0 !important;
+                                padding: 0 !important;
+                                width: 100%;
+                                height: 100%;
+                            }
+                            body {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+                            img {
+                                max-width: 100%;
+                                height: auto;
+                                display: block;
+                            }
+                            @media print {
+                                @page {
+                                    margin: 0;
+                                    size: auto;
+                                }
+                                html, body {
+                                    margin: 0 !important;
+                                    padding: 0 !important;
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                                img {
+                                    max-width: 100%;
+                                    width: 100%;
+                                    height: auto;
+                                    page-break-inside: avoid;
+                                }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <img src="${dataUrl}" onload="window.print();window.close()"/>
                     </body>
                 </html>
             `);
