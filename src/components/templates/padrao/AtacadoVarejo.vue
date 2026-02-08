@@ -84,7 +84,7 @@ const fontSizes = computed(() => props.config.fontSize);
           Unidade
         </span>
         <div class="flex items-baseline justify-center text-blue-900 leading-none mt-2" :class="data.font">
-          <span class="text-[4cqw] mr-1">R$</span>
+          <span :style="{ fontSize: fontSizes.priceCurrency }" class="mr-1">R$</span>
           <span :style="{ fontSize: fontSizes.priceInteger }">{{ retailParts.int }}</span>
           <span :style="{ fontSize: fontSizes.priceDecimal }">,{{ retailParts.dec }}</span>
         </div>
@@ -99,7 +99,7 @@ const fontSizes = computed(() => props.config.fontSize);
         </div>
        
         <div class="flex items-baseline justify-center text-red-700 leading-none mt-4 drop-shadow-sm" :class="data.font">
-          <span class="text-[6cqw] mr-2">R$</span>
+          <span :style="{ fontSize: fontSizes.priceCurrency }" class="mr-2">R$</span>
           <span class="text-[22cqw]">{{ wholesaleParts.int }}</span>
           <div class="flex flex-col justify-start ml-1">
             <span class="text-[10cqw] leading-none">,{{ wholesaleParts.dec }}</span>

@@ -79,7 +79,7 @@ const fontSizes = computed(() => props.config.fontSize);
         class="relative z-10 flex items-baseline text-red-600 dropshadow-white leading-none"
         :class="data.font"
       >
-        <span :style="{ fontSize: fontSizes.priceDecimal }" class="mr-2">R$</span>
+        <span :style="{ fontSize: fontSizes.priceCurrency }" class="mr-2">R$</span>
         <span :style="{ fontSize: fontSizes.priceInteger }" class="tracking-tight">{{ priceParts.int }}</span>
         <span :style="{ fontSize: fontSizes.priceInteger }" class="tracking-tight">,{{ priceParts.dec }}</span>
       </div>

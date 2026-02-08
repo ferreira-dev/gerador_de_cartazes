@@ -17,8 +17,9 @@ Agora, cada **layout** dentro de um tema tem sua própria configuração de font
                     "fontSize": {
                         "productName": "18cqw",      // Tamanho do nome do produto
                         "productDetail": "7cqw",     // Tamanho dos detalhes (marca/tipo)
+                        "priceCurrency": "18cqw",    // Tamanho do símbolo monetário (R$)
                         "priceInteger": "50cqw",     // Tamanho do preço (inteiro)
-                        "priceDecimal": "18cqw"      // Tamanho dos centavos/símbolo
+                        "priceDecimal": "18cqw"      // Tamanho dos centavos
                     }
                 }
             }
@@ -46,6 +47,7 @@ Agora, cada **layout** dentro de um tema tem sua própria configuração de font
 
    - **Nome do produto maior?** → Aumente `productName` (ex: de 18cqw para 20cqw)
    - **Preço maior?** → Aumente `priceInteger` (ex: de 50cqw para 55cqw)
+   - **R$ maior?** → Aumente `priceCurrency` (ex: de 18cqw para 20cqw)
 
 ### Exemplo de ajuste:
 
@@ -55,9 +57,10 @@ Agora, cada **layout** dentro de um tema tem sua própria configuração de font
         "oferta-destaque": {
             "config": {
                 "fontSize": {
-                    "productName": "20cqw",    // Aumentado
+                    "productName": "20cqw",      // Aumentado
                     "productDetail": "8cqw",
-                    "priceInteger": "55cqw",    // Aumentado
+                    "priceCurrency": "20cqw",    // Aumentado
+                    "priceInteger": "55cqw",     // Aumentado
                     "priceDecimal": "20cqw"
                 }
             }

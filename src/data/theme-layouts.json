@@ -17,6 +17,7 @@
                     "fontSize": {
                         "productName": "12cqw",
                         "productDetail": "5cqw",
+                        "priceCurrency": "5cqw",
                         "priceInteger": "35cqw",
                         "priceDecimal": "12cqw"
                     }
@@ -32,6 +33,7 @@
                     "fontSize": {
                         "productName": "10cqw",
                         "productDetail": "4cqw",
+                        "priceCurrency": "5cqw",
                         "priceInteger": "18cqw",
                         "priceDecimal": "8cqw"
                     }
@@ -57,8 +59,9 @@
                     "fontSize": {
                         "productName": "18cqw",
                         "productDetail": "8cqw",
-                        "priceInteger": "45cqw",
-                        "priceDecimal": "18cqw"
+                        "priceCurrency": "4cqw",
+                        "priceInteger": "40cqw",
+                        "priceDecimal": "14cqw"
                     }
                 }
             },
@@ -72,6 +75,7 @@
                     "fontSize": {
                         "productName": "16cqw",
                         "productDetail": "6cqw",
+                        "priceCurrency": "10cqw",
                         "priceInteger": "20cqw",
                         "priceDecimal": "10cqw"
                     }
@@ -101,8 +105,9 @@
                     "fontSize": {
                         "productName": "18cqw",
                         "productDetail": "8cqw",
-                        "priceInteger": "45cqw",
-                        "priceDecimal": "18cqw"
+                        "priceCurrency": "4cqw",
+                        "priceInteger": "40cqw",
+                        "priceDecimal": "14cqw"
                     }
                 }
             },
@@ -116,6 +121,7 @@
                     "fontSize": {
                         "productName": "16cqw",
                         "productDetail": "6cqw",
+                        "priceCurrency": "10cqw",
                         "priceInteger": "20cqw",
                         "priceDecimal": "10cqw"
                     }
@@ -145,8 +151,9 @@
                     "fontSize": {
                         "productName": "18cqw",
                         "productDetail": "8cqw",
-                        "priceInteger": "45cqw",
-                        "priceDecimal": "18cqw"
+                        "priceCurrency": "4cqw",
+                        "priceInteger": "40cqw",
+                        "priceDecimal": "14cqw"
                     }
                 }
             },
@@ -160,6 +167,7 @@
                     "fontSize": {
                         "productName": "16cqw",
                         "productDetail": "6cqw",
+                        "priceCurrency": "10cqw",
                         "priceInteger": "20cqw",
                         "priceDecimal": "10cqw"
                     }

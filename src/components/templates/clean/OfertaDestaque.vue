@@ -69,7 +69,7 @@ const fontSizes = computed(() => props.config.fontSize);
         :class="data.font"
       >
         <!-- R$ -->
-        <span class="text-[5cqw] mr-2">R$</span>
+        <span :style="{ fontSize: fontSizes.priceCurrency }" class="mr-2">R$</span>
         
         <!-- Número Inteiro -->
         <span class="text-[35cqw] tracking-wide">{{ priceParts.int }}</span>
