@@ -84,6 +84,27 @@
                         "priceDecimal": "10cqw"
                     }
                 }
+            },
+            "atacado-varejo2": {
+                "component": "padrao/AtacadoVarejo2",
+                "name": "Atacado/Varejo v2",
+                "description": "Preços diferenciados com estilo pincelado",
+                "config": {
+                    "headerStyle": "brush-yellow",
+                    "priceStyle": "brushed",
+                    "productInfoSpacing": "0",
+                    "fontSize": {
+                        "productName": "15cqw",
+                        "productDetail": "8cqw",
+                        "priceCurrency": "4cqw",
+                        "priceInteger": "20cqw",
+                        "priceDecimal": "10cqw",
+                        "priceRetailInteger": "12cqw",
+                        "priceRetailDecimal": "6cqw",
+                        "priceWholesaleInteger": "40cqw",
+                        "priceWholesaleDecimal": "14cqw"
+                    }
+                }
             }
         }
     },
@@ -132,6 +153,27 @@
                         "priceDecimal": "10cqw"
                     }
                 }
+            },
+            "atacado-varejo2": {
+                "component": "hortifruti/AtacadoVarejo2",
+                "name": "Atacado/Varejo v2",
+                "description": "Preços diferenciados com estilo pincelado",
+                "config": {
+                    "headerStyle": "image",
+                    "priceStyle": "brushed",
+                    "productInfoSpacing": "0",
+                    "fontSize": {
+                        "productName": "15cqw",
+                        "productDetail": "8cqw",
+                        "priceCurrency": "4cqw",
+                        "priceInteger": "20cqw",
+                        "priceDecimal": "10cqw",
+                        "priceRetailInteger": "12cqw",
+                        "priceRetailDecimal": "6cqw",
+                        "priceWholesaleInteger": "40cqw",
+                        "priceWholesaleDecimal": "14cqw"
+                    }
+                }
             }
         }
     },
@@ -178,6 +220,27 @@
                         "priceCurrency": "10cqw",
                         "priceInteger": "20cqw",
                         "priceDecimal": "10cqw"
+                    }
+                }
+            },
+            "atacado-varejo2": {
+                "component": "acougue/AtacadoVarejo2",
+                "name": "Atacado/Varejo v2",
+                "description": "Preços diferenciados com estilo pincelado",
+                "config": {
+                    "headerStyle": "image",
+                    "priceStyle": "brushed",
+                    "productInfoSpacing": "0",
+                    "fontSize": {
+                        "productName": "15cqw",
+                        "productDetail": "8cqw",
+                        "priceCurrency": "4cqw",
+                        "priceInteger": "20cqw",
+                        "priceDecimal": "10cqw",
+                        "priceRetailInteger": "12cqw",
+                        "priceRetailDecimal": "6cqw",
+                        "priceWholesaleInteger": "40cqw",
+                        "priceWholesaleDecimal": "14cqw"
                     }
                 }
             }

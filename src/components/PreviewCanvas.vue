@@ -8,10 +8,13 @@ const componentMap = {
   'clean/AtacadoVarejo': markRaw(defineAsyncComponent(() => import('./templates/clean/AtacadoVarejo.vue'))),
   'padrao/OfertaDestaque': markRaw(defineAsyncComponent(() => import('./templates/padrao/OfertaDestaque.vue'))),
   'padrao/AtacadoVarejo': markRaw(defineAsyncComponent(() => import('./templates/padrao/AtacadoVarejo.vue'))),
+  'padrao/AtacadoVarejo2': markRaw(defineAsyncComponent(() => import('./templates/padrao/AtacadoVarejo2.vue'))),
   'hortifruti/OfertaDestaque': markRaw(defineAsyncComponent(() => import('./templates/hortifruti/OfertaDestaque.vue'))),
   'hortifruti/AtacadoVarejo': markRaw(defineAsyncComponent(() => import('./templates/hortifruti/AtacadoVarejo.vue'))),
+  'hortifruti/AtacadoVarejo2': markRaw(defineAsyncComponent(() => import('./templates/hortifruti/AtacadoVarejo2.vue'))),
   'acougue/OfertaDestaque': markRaw(defineAsyncComponent(() => import('./templates/acougue/OfertaDestaque.vue'))),
-  'acougue/AtacadoVarejo': markRaw(defineAsyncComponent(() => import('./templates/acougue/AtacadoVarejo.vue')))
+  'acougue/AtacadoVarejo': markRaw(defineAsyncComponent(() => import('./templates/acougue/AtacadoVarejo.vue'))),
+  'acougue/AtacadoVarejo2': markRaw(defineAsyncComponent(() => import('./templates/acougue/AtacadoVarejo2.vue')))
 };
 
 const store = usePosterStore();
