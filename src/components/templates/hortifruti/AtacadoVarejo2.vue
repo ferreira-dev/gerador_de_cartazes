@@ -61,7 +61,7 @@ const productInfoSpacingClass = computed(() => `space-y-${props.config.productIn
     <div class="flex-1 w-full flex flex-col items-center justify-start px-8 text-center z-10 mt-4" :class="productInfoSpacingClass">
       <h2 
         :style="{ fontSize: fontSizes.productName }"
-        class="text-black leading-normal uppercase break-words w-full line-clamp-3 py-2 px-4"
+        class="text-black leading-none uppercase break-words w-full line-clamp-3 py-2 px-4"
         :class="data.font"
       >
         {{ data.productName || 'NOME DO PRODUTO' }}
@@ -69,7 +69,7 @@ const productInfoSpacingClass = computed(() => `space-y-${props.config.productIn
       
       <p 
         :style="{ fontSize: fontSizes.productDetail }"
-        class="text-black opacity-80 uppercase leading-normal"
+        class="text-black opacity-80 uppercase leading-none"
         :class="data.font"
       >
         {{ data.productDetail || 'DETALHES DO PRODUTO' }}
@@ -77,7 +77,7 @@ const productInfoSpacingClass = computed(() => `space-y-${props.config.productIn
     </div>
 
     <!-- Preço Varejo - Fundo amarelo pincelado pequeno -->
-    <div class="relative w-full flex justify-center items-center mb-2 z-10" style="min-height: 20cqw;">
+    <div class="relative w-full flex justify-center items-center  z-10" style="min-height: 20cqw;">
       <div 
         class="relative z-10 flex items-baseline text-red-600 dropshadow-white leading-none"
         :class="data.font"
@@ -89,7 +89,7 @@ const productInfoSpacingClass = computed(() => `space-y-${props.config.productIn
     </div>
 
     <!-- Texto informativo -->
-    <div class="text-center mb-2 z-10">
+    <div class="text-center  z-10">
       <p 
         class="text-black uppercase leading-none text-[6cqw]"
         :class="data.font"
