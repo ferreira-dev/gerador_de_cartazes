@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!loading">
+  <div v-if="!loading" class="flex flex-col flex-1 min-h-0">
     <!-- Usuário autenticado: mostra o conteúdo -->
     <slot v-if="isAuthenticated" :user="user"></slot>
     

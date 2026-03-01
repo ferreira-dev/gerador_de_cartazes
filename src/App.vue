@@ -61,17 +61,17 @@ const storeCurrentPaper = computed(() => store.paperSize);
       </div>
     </header>
 
-    <main class="flex-1 container mx-auto p-4 lg:p-6">
-      <ProtectedContent>
+    <main class="flex-1 container mx-auto p-4 lg:p-6 flex flex-col overflow-hidden">
+      <ProtectedContent class="flex-1 min-h-0 flex flex-col">
         <template #default="{ user }">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 min-h-0 lg:grid-rows-[1fr]">
             
             <!-- Sidebar -->
-            <div class="lg:col-span-4 lg:h-[calc(100vh-100px)] flex flex-col overflow-hidden min-h-0">
-              <div class="flex-1 overflow-y-auto pr-2 pb-6 custom-scrollbar space-y-6">
+            <div class="lg:col-span-4 flex flex-col overflow-hidden min-h-0 h-full">
+              <div class="flex-1 overflow-y-auto pr-2 pb-6 custom-scrollbar flex flex-col gap-6">
               
                 <!-- Theme Selection -->
-                <section class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
+                <section class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 shrink-0">
                   <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
                     Tema do Cartaz
@@ -80,7 +80,7 @@ const storeCurrentPaper = computed(() => store.paperSize);
                 </section>
 
                 <!-- Template Selection -->
-                <section class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
+                <section class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 shrink-0">
                   <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
                     Modelo de Precificação
@@ -89,7 +89,7 @@ const storeCurrentPaper = computed(() => store.paperSize);
                 </section>
 
                 <!-- Product Data Form -->
-                <section class="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
+                <section class="bg-white p-5 rounded-xl shadow-sm border border-slate-100 flex-1 flex flex-col">
                    <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wide mb-4 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                     Editar Informações
@@ -101,7 +101,7 @@ const storeCurrentPaper = computed(() => store.paperSize);
             </div>
 
             <!-- Main Preview Area -->
-            <div class="lg:col-span-8 flex flex-col h-full overflow-hidden bg-white rounded-xl shadow-sm border border-slate-200">
+            <div class="lg:col-span-8 flex flex-col overflow-hidden bg-white rounded-xl shadow-sm border border-slate-200 h-full">
               
               <!-- Toolbar -->
               <div class="p-4 border-b border-slate-100 flex flex-wrap justify-between items-center gap-4 bg-white z-10">
