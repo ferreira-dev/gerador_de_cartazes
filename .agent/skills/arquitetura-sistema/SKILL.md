@@ -60,11 +60,24 @@ useExport.js (PNG/PDF/Impressão)
 - Usar `container-type: inline-size` nos templates
 - Usar `<script setup>` e `ref()`
 - Manter consistência de idioma por escopo
+- **Manter imagens referenciadas por string (JSON/CSS dinâmico) em `public/images/`** com path iniciando em `/images/...`
 
 ❌ **NUNCA**:
 - Usar pixels fixos em componentes de template
 - Usar Options API ou `reactive()` para primitivos
 - Misturar PT-BR e EN no mesmo módulo
+- **Referenciar imagens por string com path `/src/assets/...`** — o Vite não rastreia essas referências no build de produção, causando 404 na Vercel
+
+### Assets Estáticos (Imagens)
+
+O projeto usa **dois locais distintos** para assets, com regras bem definidas:
+
+| Local | Quando usar | Exemplo de path |
+|-------|-------------|------------------|
+| `public/images/` | Imagens referenciadas **por string** em JSON, CSS dinâmico ou URLs montadas em runtime | `/images/themes/header_hortifruti.png` |
+| `src/assets/` | Imagens importadas **diretamente** via `import` em componentes `.vue` ou `.js` | `import logo from '@/assets/logo.png'` |
+
+> **Regra de ouro:** Se o path da imagem está como string em `theme-layouts.json` ou em qualquer dado dinâmico, ela **obrigatoriamente** deve estar em `public/`. O Vite só processa e inclui no bundle de produção os arquivos que consegue rastrear via `import` estático.
 
 ### Docker
 

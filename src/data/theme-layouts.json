@@ -48,7 +48,7 @@
         "description": "Fundo com pinceladas amarelas",
         "background": {
             "type": "image",
-            "value": "/src/assets/images/themes/fundo_base.png"
+            "value": "/images/themes/fundo_base.png"
         },
         "layouts": {
             "oferta-destaque": {
@@ -113,11 +113,11 @@
         "description": "Tema para hortifrúti com cabeçalho personalizado",
         "background": {
             "type": "image",
-            "value": "/src/assets/images/themes/fundo_base.png"
+            "value": "/images/themes/fundo_base.png"
         },
         "header": {
             "type": "image",
-            "value": "/src/assets/images/themes/header_hortifruti.png"
+            "value": "/images/themes/header_hortifruti.png"
         },
         "layouts": {
             "oferta-destaque": {
@@ -182,11 +182,11 @@
         "description": "Tema para açougue com cabeçalho personalizado",
         "background": {
             "type": "image",
-            "value": "/src/assets/images/themes/fundo_base.png"
+            "value": "/images/themes/fundo_base.png"
         },
         "header": {
             "type": "image",
-            "value": "/src/assets/images/themes/header_acougue.png"
+            "value": "/images/themes/header_acougue.png"
         },
         "layouts": {
             "oferta-destaque": {
