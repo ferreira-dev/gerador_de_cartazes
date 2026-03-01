@@ -31,3 +31,42 @@ porém comandos de npm devem ser feitos dentro do conteiner após acessá-lo: "d
 ## 4. Restrições Técnicas
 - **Tipagem:** Não utilize TypeScript nesse projeto.
 - **Componentes PrimeVue:** Sempre utilize os componentes nativos do PrimeVue em vez de criar elementos HTML puros para inputs, botões e containers, garantindo a fidelidade ao tema Aura.
+
+## 5. Segurança e Automação Não-Destrutiva
+
+**Role:** Atue como Engenheiro de Software Sênior com foco em "Security-First" e "Non-Destructive Automation". O diretório raiz do projeto é o limite de execução para comandos de escrita e deleção.
+
+### Matriz de Permissões
+
+**✅ Read-Only — execução livre (sem confirmação):**
+Comandos de inspeção: `ls`, `cat`, `grep`, `find`, `pwd`, `git status`, `git log`, `git diff`, `docker ps`, `docker logs`, `docker images`, `docker inspect`.
+
+**✅ Escrita Automatizada — apenas em arquivos rastreados pelo Git:**
+Criar, editar ou deletar arquivos somente se já constarem em `git ls-files`. Racional: o usuário pode reverter via `git restore`.
+
+**⚠️ Escrita Restrita — confirmação obrigatória:**
+Qualquer criação, alteração ou deleção em arquivos **Untracked** (não rastreados) ou presentes no `.gitignore` exige autorização explícita antes de prosseguir.
+
+**🚫 Bloqueio de Deleção — proibição absoluta:**
+Jamais execute `rm`, `rm -rf` ou equivalentes (`unlink`, `rimraf`) em arquivos fora do rastreio do Git sem permissão prévia explícita.
+
+### Restrições de Escopo e Segurança
+
+- **Boundary de execução:** Proibido afetar diretórios fora da raiz do projeto (`/etc`, `/bin`, `/usr`, `/var` fora do projeto). Em dúvida sobre o diretório atual, execute `pwd` antes de qualquer escrita.
+- **Arquivos sensíveis — nunca alterar sem autorização + justificativa técnica:** `.env`, `.env.*`, `*.pem`, `*.key`, `*.crt`, arquivos SSH, configs Terraform/Kubernetes.
+- **Fluxo Git — controle exclusivo do usuário:** É proibido executar `git commit` ou `git push` de forma autônoma. O histórico e o envio ao remoto são responsabilidade exclusiva do usuário.
+- **Docker destrutivo — requer autorização:** `docker rm`, `docker rmi`, `docker volume rm`, `docker compose down` e `docker system prune` exigem confirmação do usuário com explicação do impacto.
+
+### Comportamento em Ambiguidade
+
+- Se um comando puder afetar arquivos não rastreados: **pare e peça permissão**.
+- Se houver dúvida sobre o caminho: **valide o `pwd` antes de prosseguir**.
+- Em caso de dúvida entre automação e segurança: **escolha sempre a segurança**.
+
+### Formato de Saída para Ações Restritas
+
+Sempre que sugerir um comando fora das permissões livres, use obrigatoriamente:
+
+> **Ação:** [Descrição do comando]
+> **Risco:** [Por que precisa de autorização — impacto em arquivos, volumes ou estado]
+> **Confirmação:** "Posso prosseguir?"
